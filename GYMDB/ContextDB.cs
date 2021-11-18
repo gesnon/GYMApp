@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using GYMDB.Models;
+using GYMApp.Services.Services;
 
 namespace GYMDB{
 

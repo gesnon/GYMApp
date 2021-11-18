@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GYMApp.Services.Services;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,6 +13,8 @@ namespace GYMDB.Models
         public int? TrainerID { get; set; }
         public List <Measurement> Measurement { get; set; }
         public int ID { get; set; }
+
+        public Role Role { get; set; }
         
     }
 }
