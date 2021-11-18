@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GYMApp", "GYMApp\GYMApp.csproj", "{1F35E94B-145F-4128-8246-7C11431B74DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GYMDB", "GYMDB\GYMDB.csproj", "{8DF6A1F0-F243-4816-B93A-E4ACCA049FEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GYMApp.Services", "GYMApp.Services\GYMApp.Services.csproj", "{92399DFB-FB72-4DC9-B829-BBF223698747}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F35E94B-145F-4128-8246-7C11431B74DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F35E94B-145F-4128-8246-7C11431B74DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F35E94B-145F-4128-8246-7C11431B74DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F35E94B-145F-4128-8246-7C11431B74DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DF6A1F0-F243-4816-B93A-E4ACCA049FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DF6A1F0-F243-4816-B93A-E4ACCA049FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DF6A1F0-F243-4816-B93A-E4ACCA049FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DF6A1F0-F243-4816-B93A-E4ACCA049FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92399DFB-FB72-4DC9-B829-BBF223698747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92399DFB-FB72-4DC9-B829-BBF223698747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92399DFB-FB72-4DC9-B829-BBF223698747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92399DFB-FB72-4DC9-B829-BBF223698747}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {19501BDF-D8E2-4711-B290-9E45BA7FA95D}
+	EndGlobalSection
+EndGlobal
