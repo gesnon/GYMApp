@@ -6,13 +6,12 @@ namespace GYMApp.Services.DTO
 {
     public class ClientDTO
     {
-        public string FullNAme { get; set; }
+        public string FullName { get; set; }
 
         public string Trainer { get; set; }
 
-        public List<MeasurementDTO>  MeasuremenstDTO { get; set; }
+        public List<MeasurementDTO> MeasurementDTO { get; set; }
 
-
-
+        public string Program { get; set; }
     }
 }

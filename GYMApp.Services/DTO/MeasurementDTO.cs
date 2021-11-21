@@ -15,5 +15,11 @@ namespace GYMApp.Services.DTO
         public int RightLeg { get; set; }
 
         public int Chest { get; set; }
+
+        public int Weight { get; set; }
+
+        public int Height { get; set; }
+
+        
     }
 }
