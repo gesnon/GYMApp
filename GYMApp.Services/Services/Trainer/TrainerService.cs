@@ -6,12 +6,17 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace GYMApp.Services.Services.Trainer
+namespace GYMApp.Services.Services
 {
     public class TrainerService: ITrainerService
     {
         private readonly ContextDB context;
-        public GYMDB.Models.Trainer GetTrainer(int TrainerID)
+
+        public TrainerService (ContextDB context)
+        {
+            this.context = context;
+        }
+        public Trainer GetTrainer(int TrainerID)
         {
             return context.Trainers.FirstOrDefault(_ => _.ID == TrainerID);
         }

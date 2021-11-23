@@ -4,16 +4,22 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using GYMDB.Models;
 
-
-namespace GYMApp.Services.Services.Measurement
+namespace GYMApp.Services.Services
 {
     public class MeasurementService : IMeasurementService
     {
         private readonly ContextDB context;
-        public GYMDB.Models.Measurement CreateMeasurement(MeasurementDTO measurementDTO)
+
+        public MeasurementService (ContextDB context)
         {
-            return new GYMDB.Models.Measurement
+            this.context = context;
+        }
+
+        public Measurement CreateMeasurement(MeasurementDTO measurementDTO)
+        {
+            return new Measurement
             {  
                 DateOfCreation=DateTime.Today,
                 LeftArm = measurementDTO.LeftArm,
@@ -30,7 +36,7 @@ namespace GYMApp.Services.Services.Measurement
 
         public void UpdateMeasurement(int ID, MeasurementDTO measurementDTO)
         {
-            GYMDB.Models.Measurement OldMeasurement = context.Measurements.FirstOrDefault(_ => _.ID == ID);
+            Measurement OldMeasurement = context.Measurements.FirstOrDefault(_ => _.ID == ID);
 
             OldMeasurement.DateOfCreation = DateTime.Today;
             OldMeasurement.LeftArm = measurementDTO.LeftArm;

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GYMApp.Services.Services.Client
+namespace GYMApp.Services.Services
 {
     public interface IClientService
     {

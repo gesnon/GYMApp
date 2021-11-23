@@ -1,3 +1,4 @@
+using GYMApp.Services.Services;
 using GYMDB;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,8 +37,10 @@ namespace GYMApp
             });
 
             services.AddDbContext<ContextDB>(options => options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=Powerline;Trusted_Connection=true")); // эта строка новая, добавляется при подключении БД
-            
-            //services.AddTransient<IClientService>, ClientService();
+                        
+            services.AddTransient<IClientService, ClientService>();
+            services.AddTransient<IMeasurementService, MeasurementService>();
+            services.AddTransient<ITrainerService, TrainerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

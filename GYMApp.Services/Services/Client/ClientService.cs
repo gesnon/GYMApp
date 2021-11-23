@@ -5,19 +5,24 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using GYMApp.Services.Services.Measurement;
-using GYMApp.Services.Services.Trainer;
 
-namespace GYMApp.Services.Services.Client
+
+namespace GYMApp.Services.Services
 {
     public class ClientService : IClientService
     {
         private readonly ContextDB context;
+        private readonly IMeasurementService measurementService;
+        private readonly ITrainerService trainerService;
 
-        MeasurementService measurementService = new MeasurementService();
-        TrainerService trainerService = new TrainerService();
+        public ClientService (ContextDB context, IMeasurementService measurementService, ITrainerService trainerService)
+        {
+            this.context = context;
+            this.measurementService = measurementService;
+            this.trainerService = trainerService;
+        }
 
-        public GYMDB.Models.Client GetClient(int ClientID)
+        public Client GetClient(int ClientID)
         {
             return context.Clients.FirstOrDefault(_ => _.ID == ClientID);
         }
@@ -29,7 +34,7 @@ namespace GYMApp.Services.Services.Client
 
         public void AddNewClient(ClientDTO newClientDTO)   // Не уверен что этот медот должен быть в сервисе клиента 
         {
-            this.context.Clients.Add(new GYMDB.Models.Client
+            this.context.Clients.Add(new Client
             {
                 FullName = newClientDTO.FullName,
                 Trainer = this.context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).FullName, //возможно надо сравнивать не через ==, а через Contains    
