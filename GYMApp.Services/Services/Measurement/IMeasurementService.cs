@@ -10,7 +10,8 @@ namespace GYMApp.Services.Services
     {
         public Measurement CreateMeasurement(MeasurementDTO measurementDTO);
 
-        public void UpdateMeasurement(int ID, MeasurementDTO measurementDTO); 
+        public void UpdateMeasurement(int ID, MeasurementDTO measurementDTO);
 
+       // public void DeleteMeasurement(int ID);             // не уверен что вообще нужен такой метод
     }
 }

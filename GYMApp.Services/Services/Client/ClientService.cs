@@ -22,13 +22,38 @@ namespace GYMApp.Services.Services
             this.trainerService = trainerService;
         }
 
+        public void UpdateClient(int ClientID, ClientDTO newClientDTO )
+        {
+            Client OldClient = context.Clients.FirstOrDefault(_ => _.ID == ClientID);
+
+            if (newClientDTO.FullName != null)
+            {
+                OldClient.FullName = newClientDTO.FullName;
+
+            }
+
+            if (newClientDTO.Program != null)
+            {
+                OldClient.Program = newClientDTO.Program;
+
+            }
+
+            if (newClientDTO.Trainer != null)
+            {
+                OldClient.Trainer = newClientDTO.Trainer;
+
+                OldClient.TrainerID = context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).ID;
+            }
+            
+        }
+
         public Client GetClient(int ClientID)
         {
             return context.Clients.FirstOrDefault(_ => _.ID == ClientID);
         }
         public void AddNewMeasurement(int ClientID, MeasurementDTO newMeasurementDTO)
         {
-            GYMDB.Models.Client Client = new GYMDB.Models.Client();
+            Client Client = new Client();
             Client.Measurement.Add(measurementService.CreateMeasurement(newMeasurementDTO));
         }
 
@@ -46,6 +71,11 @@ namespace GYMApp.Services.Services
         {
             this.GetClient(ClientID).Trainer = trainerService.GetTrainer(TrainerID).FullName;
             this.GetClient(ClientID).TrainerID = TrainerID;
+        }
+
+        public List<Measurement> GetMeasurements(int ClientID)
+        {
+            return context.Clients.FirstOrDefault(_ => _.ID == ClientID).Measurement;
         }
     }
 }
