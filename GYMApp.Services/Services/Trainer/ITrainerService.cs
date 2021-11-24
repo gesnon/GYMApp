@@ -14,7 +14,7 @@ namespace GYMApp.Services.Services
         
         public void UpdateTrainer(int ID, TrainerDTO newTrainerDTO);
 
-        public void AddNewReview(int ID,string Review);
+        public void AddNewReview(int ID,ReviewDTO newReviewDTO);
 
     }
 }

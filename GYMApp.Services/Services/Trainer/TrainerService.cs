@@ -11,10 +11,12 @@ namespace GYMApp.Services.Services
     public class TrainerService : ITrainerService
     {
         private readonly ContextDB context;
+        private readonly IReviewService reviewService;
 
-        public TrainerService(ContextDB context)
+        public TrainerService(ContextDB context, IReviewService reviewService)
         {
             this.context = context;
+            this.reviewService = reviewService;
         }
         public Trainer GetTrainer(int TrainerID)
         {
@@ -26,7 +28,7 @@ namespace GYMApp.Services.Services
             {
                 FullName = newTrainerDTO.FullName,
                 Comments = newTrainerDTO.Comments,
-                Reviews = newTrainerDTO.Reviews
+                Reviews = new List<Review> { reviewService.CreateReview(newTrainerDTO.ReviewsDTO[0]) }
             };
         }
         public void UpdateTrainer(int TrainewID, TrainerDTO newTrainerDTO)
@@ -41,14 +43,17 @@ namespace GYMApp.Services.Services
             {
                 OldTrainer.Comments = newTrainerDTO.Comments;
             }
-
-            OldTrainer.Reviews = newTrainerDTO.Reviews; //не уверен что это будет правильно работать
+           
+            foreach(ReviewDTO review in newTrainerDTO.ReviewsDTO)
+            {
+                OldTrainer.Reviews.Add(reviewService.CreateReview(review));//не уверен что это будет правильно работать
+            }
 
         }
 
-        public void AddNewReview(int TrainerID,string newRewiev)
+        public void AddNewReview(int TrainerID,ReviewDTO newRewievDTO)
         {
-            context.Trainers.FirstOrDefault(_ => _.ID == TrainerID).Reviews.Add(newRewiev);
+            context.Trainers.FirstOrDefault(_ => _.ID == TrainerID).Reviews.Add(reviewService.CreateReview(newRewievDTO));
         }
     }
 }

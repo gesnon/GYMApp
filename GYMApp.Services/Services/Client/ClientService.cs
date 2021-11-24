@@ -15,14 +15,14 @@ namespace GYMApp.Services.Services
         private readonly IMeasurementService measurementService;
         private readonly ITrainerService trainerService;
 
-        public ClientService (ContextDB context, IMeasurementService measurementService, ITrainerService trainerService)
+        public ClientService(ContextDB context, IMeasurementService measurementService, ITrainerService trainerService)
         {
             this.context = context;
             this.measurementService = measurementService;
             this.trainerService = trainerService;
         }
 
-        public void UpdateClient(int ClientID, ClientDTO newClientDTO )
+        public void UpdateClient(int ClientID, ClientDTO newClientDTO)
         {
             Client OldClient = context.Clients.FirstOrDefault(_ => _.ID == ClientID);
 
@@ -44,7 +44,7 @@ namespace GYMApp.Services.Services
 
                 OldClient.TrainerID = context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).ID;
             }
-            
+
         }
 
         public Client GetClient(int ClientID)
@@ -67,10 +67,22 @@ namespace GYMApp.Services.Services
             });
         }
 
-        public void ChooseTrainer(int ClientID,  int TrainerID)
+        public void ChooseTrainer(int ClientID, int TrainerID)
         {
             this.GetClient(ClientID).Trainer = trainerService.GetTrainer(TrainerID).FullName;
             this.GetClient(ClientID).TrainerID = TrainerID;
+        }
+        public Client CreateClient(ClientDTO newClientDTO)
+        {           
+            return new Client
+            {
+                FullName = newClientDTO.FullName,
+                Program = newClientDTO.Program,
+                Measurement = new List<Measurement> { measurementService.CreateMeasurement(newClientDTO.MeasurementDTO[0]) },
+                Trainer = newClientDTO.Trainer,
+                TrainerID = context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).ID,
+
+            };
         }
 
         public List<Measurement> GetMeasurements(int ClientID)
