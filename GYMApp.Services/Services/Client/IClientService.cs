@@ -22,5 +22,7 @@ namespace GYMApp.Services.Services
         public Client GetClient(int ClientID);
 
         public  List<Measurement> GetMeasurements(int ID);  // Мне кажется что этот метод можно сделать статичным и вообще не передавать параметр, но я не смог
+
+        public List<Client> GetAllTrainerClients(int TrainerID);  // Возможно этот метод должен быть в сервисе тренера 
     }
 }

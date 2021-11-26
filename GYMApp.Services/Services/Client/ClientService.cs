@@ -89,5 +89,20 @@ namespace GYMApp.Services.Services
         {
             return context.Clients.FirstOrDefault(_ => _.ID == ClientID).Measurement;
         }
+
+        public List<Client> GetAllTrainerClients(int TrainerID)
+        {            
+            List<Client> Clients = new List<Client>();
+
+            foreach(Client c in context.Clients)
+            {
+                if (c.TrainerID == TrainerID)
+                {
+                    Clients.Add(c);
+                }
+            }
+
+            return Clients;
+        }
     }
 }
