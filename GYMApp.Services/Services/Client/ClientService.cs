@@ -45,16 +45,24 @@ namespace GYMApp.Services.Services
                 OldClient.TrainerID = context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).ID;
             }
 
+            context.SaveChanges();
         }
 
         public Client GetClient(int ClientID)
         {
             return context.Clients.FirstOrDefault(_ => _.ID == ClientID);
         }
+
+        public List<Client> GetClientsByName(string Name)
+        {
+            return context.Clients.Where(_ => _.FullName.Contains(Name)).ToList();
+        }
+
         public void AddNewMeasurement(int ClientID, MeasurementDTO newMeasurementDTO)
         {
             Client Client = new Client();
             Client.Measurement.Add(measurementService.CreateMeasurement(newMeasurementDTO));
+            context.SaveChanges();
         }
 
         public void AddNewClient(ClientDTO newClientDTO)   // Не уверен что этот медот должен быть в сервисе клиента 
@@ -65,13 +73,11 @@ namespace GYMApp.Services.Services
                 Trainer = this.context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).FullName, //возможно надо сравнивать не через ==, а через Contains    
                 TrainerID = this.context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).ID,
             });
+
+            context.SaveChanges();
         }
 
-        public void ChooseTrainer(int ClientID, int TrainerID)
-        {
-            this.GetClient(ClientID).Trainer = trainerService.GetTrainer(TrainerID).FullName;
-            this.GetClient(ClientID).TrainerID = TrainerID;
-        }
+
         public Client CreateClient(ClientDTO newClientDTO)
         {           
             return new Client
@@ -91,18 +97,17 @@ namespace GYMApp.Services.Services
         }
 
         public List<Client> GetAllTrainerClients(int TrainerID)
-        {            
-            List<Client> Clients = new List<Client>();
-
-            foreach(Client c in context.Clients)
-            {
-                if (c.TrainerID == TrainerID)
-                {
-                    Clients.Add(c);
-                }
-            }
+        {
+            List<Client> Clients = context.Clients.Where(_ => _.TrainerID == TrainerID).ToList();                     
 
             return Clients;
+        }
+
+        public void DeleteClient(int ClientID)
+        {
+            context.Clients.Remove(context.Clients.FirstOrDefault(_ => _.ID == ClientID));
+
+            context.SaveChanges();
         }
     }
 }

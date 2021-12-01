@@ -17,12 +17,14 @@ namespace GYMApp.Services.Services
 
         public void AddNewMeasurement(int ClientID,MeasurementDTO measurementDTO);
 
-        public void ChooseTrainer(int ClientID, int TrainerID); // по идее можно использовать как для выбора тренера, так и для смены
-
         public Client GetClient(int ClientID);
 
-        public  List<Measurement> GetMeasurements(int ID);  // Мне кажется что этот метод можно сделать статичным и вообще не передавать параметр, но я не смог
+        public List<Client> GetClientsByName(string Name); // ищет contains, а не ==
 
-        public List<Client> GetAllTrainerClients(int TrainerID);  // Возможно этот метод должен быть в сервисе тренера 
+        public  List<Measurement> GetMeasurements(int ClientID);  
+
+        public List<Client> GetAllTrainerClients(int TrainerID);  // Возможно этот метод должен быть в сервисе тренера, да и вообще возможно проще тренеру добавить List<Client>
+
+        public void DeleteClient(int ClientID);
     }
 }

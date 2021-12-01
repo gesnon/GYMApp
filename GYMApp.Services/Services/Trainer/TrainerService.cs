@@ -48,7 +48,14 @@ namespace GYMApp.Services.Services
             {
                 OldTrainer.Reviews.Add(reviewService.CreateReview(review));//не уверен что это будет правильно работать
             }
+            context.SaveChanges();
+        }
 
+        public void DeleteTrainer(int TrainerID)
+        {
+            context.Trainers.Remove(context.Trainers.FirstOrDefault(_ => _.ID == TrainerID));
+
+            context.SaveChanges();
         }
 
         public void AddNewReview(int TrainerID,ReviewDTO newRewievDTO)

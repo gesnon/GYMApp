@@ -49,7 +49,13 @@ namespace GYMApp.Services.Services
 
             this.context.SaveChanges();
         }
-        
+            
+        public void DeleteMeasurement(int MeasurementID)
+        {
+            context.Measurements.Remove(context.Measurements.FirstOrDefault(_ => _.ID == MeasurementID));
+
+            context.SaveChanges();
+        }
 
     }
 }

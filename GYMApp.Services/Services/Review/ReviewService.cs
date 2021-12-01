@@ -22,9 +22,9 @@ namespace GYMApp.Services.Services
         {
             return new Review
             {
-                Text=newReviewDTO.Text,
-                DateOfCreation=newReviewDTO.DateOfCreation,
-                ReviewCreator=clientService.CreateClient(newReviewDTO.ReviewCreatorDTO)
+                Text = newReviewDTO.Text,
+                DateOfCreation = newReviewDTO.DateOfCreation,
+                ReviewCreator = clientService.CreateClient(newReviewDTO.ReviewCreatorDTO)
             };
         }
 
@@ -44,8 +44,16 @@ namespace GYMApp.Services.Services
             {
                 OldRewiew.ReviewCreator = clientService.CreateClient(newReviewDTO.ReviewCreatorDTO);
             }
+
+            context.SaveChanges();
         }
 
+        public void DeleteReview(int ReviewID)
+        {
+            context.Reviews.Remove(context.Reviews.FirstOrDefault(_ => _.ID == ReviewID));
+
+            context.SaveChanges();
+        }
 
     }
 }

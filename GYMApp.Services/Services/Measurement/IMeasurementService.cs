@@ -12,6 +12,6 @@ namespace GYMApp.Services.Services
 
         public void UpdateMeasurement(int ID, MeasurementDTO measurementDTO);
 
-       // public void DeleteMeasurement(int ID);             // не уверен что вообще нужен такой метод
+        public void DeleteMeasurement(int MeasurementID);            
     }
 }

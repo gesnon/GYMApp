@@ -14,5 +14,6 @@ namespace GYMApp.Services.Services
 
         public void UpdateReview(int ID, ReviewDTO newReviewDTO);
 
+        public void DeleteReview(int ReviewID);
     }
 }
