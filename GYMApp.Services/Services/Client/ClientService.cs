@@ -13,13 +13,12 @@ namespace GYMApp.Services.Services
     {
         private readonly ContextDB context;
         private readonly IMeasurementService measurementService;
-        private readonly ITrainerService trainerService;
+        
 
-        public ClientService(ContextDB context, IMeasurementService measurementService, ITrainerService trainerService)
+        public ClientService(ContextDB context, IMeasurementService measurementService)
         {
             this.context = context;
-            this.measurementService = measurementService;
-            this.trainerService = trainerService;
+            this.measurementService = measurementService;            
         }
 
         public void UpdateClient(int ClientID, ClientDTO newClientDTO)
