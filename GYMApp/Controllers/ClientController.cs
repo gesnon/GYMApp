@@ -13,14 +13,11 @@ namespace GYMApp.Controllers
     [ApiController]
     [Route("[controller]/[action]")]
     public class ClientController : ControllerBase
-    {
-
-        private readonly IMeasurementService measurementService;
+    {        
         private readonly IClientService clientService;
 
         public ClientController(IMeasurementService measurementService, IClientService clientService)
-        {
-            this.measurementService = measurementService;
+        {            
             this.clientService = clientService;
         }
 
