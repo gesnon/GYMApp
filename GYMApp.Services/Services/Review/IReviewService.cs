@@ -8,12 +8,11 @@ namespace GYMApp.Services.Services
 {
     public interface IReviewService
     {
-        
 
-        public Review CreateReview(ReviewDTO newReviewDTO);
+        //public Review CreateReview(ReviewDTO newReviewDTO);
 
-        public void UpdateReview(int ID, ReviewDTO newReviewDTO);
+        //public void UpdateReview(int ID, ReviewDTO newReviewDTO);
 
-        public void DeleteReview(int ReviewID);
+        //public void DeleteReview(int ReviewID);
     }
 }

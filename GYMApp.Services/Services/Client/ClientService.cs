@@ -57,50 +57,21 @@ namespace GYMApp.Services.Services
             return context.Clients.Where(_ => _.FullName.Contains(Name)).ToList();
         }
 
-        public void AddNewMeasurement(int ClientID, MeasurementDTO newMeasurementDTO)
-        {
-            Client Client = new Client();
-            Client.Measurement.Add(measurementService.CreateMeasurement(newMeasurementDTO));
-            context.SaveChanges();
-        }
 
-        public void AddNewClient(ClientDTO newClientDTO)   // Не уверен что этот медот должен быть в сервисе клиента 
+        public void CreateClient(ClientDTO newClientDTO)   // Не уверен что этот медот должен быть в сервисе клиента 
         {
-            this.context.Clients.Add(new Client
+            context.Clients.Add(new Client
             {
                 FullName = newClientDTO.FullName,
-                Trainer = this.context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).FullName, //возможно надо сравнивать не через ==, а через Contains    
-                TrainerID = this.context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).ID,
+                Program = newClientDTO.Program,
+                Measurement = new List<Measurement>() ,
+                Trainer = newClientDTO.Trainer,
+                TrainerID = context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).ID,
             });
 
             context.SaveChanges();
         }
 
-
-        public Client CreateClient(ClientDTO newClientDTO)
-        {           
-            return new Client
-            {
-                FullName = newClientDTO.FullName,
-                Program = newClientDTO.Program,
-                Measurement = new List<Measurement> { measurementService.CreateMeasurement(newClientDTO.MeasurementDTO[0]) },
-                Trainer = newClientDTO.Trainer,
-                TrainerID = context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).ID,
-
-            };
-        }
-
-        public List<Measurement> GetMeasurements(int ClientID)
-        {
-            return context.Clients.FirstOrDefault(_ => _.ID == ClientID).Measurement;
-        }
-
-        public List<Client> GetAllTrainerClients(int TrainerID)
-        {
-            List<Client> Clients = context.Clients.Where(_ => _.TrainerID == TrainerID).ToList();                     
-
-            return Clients;
-        }
 
         public void DeleteClient(int ClientID)
         {

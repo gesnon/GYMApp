@@ -22,7 +22,7 @@ namespace GYMApp.Controllers
 
         //public Measurement CreateMeasurement(MeasurementDTO measurementDTO)
         //{
-        //    return measurementService.CreateMeasurement(measurementDTO);        
+        //    return measurementService.CreateMeasurement(measurementDTO);
         //}
 
         //public void UpdateMeasurement(int ID, MeasurementDTO measurementDTO)

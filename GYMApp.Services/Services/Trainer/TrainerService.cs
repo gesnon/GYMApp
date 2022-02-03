@@ -74,9 +74,16 @@ namespace GYMApp.Services.Services
             context.SaveChanges();
         }
 
-        public void AddNewReview(int TrainerID, ReviewDTO newRewievDTO)
+        public List<ClientDTO> GetAllTrainerClients(int TrainerID)
         {
-            context.Trainers.FirstOrDefault(_ => _.ID == TrainerID).Reviews.Add(reviewService.CreateReview(newRewievDTO));
+            return context.Clients.Where(_ => _.TrainerID == TrainerID).Select(_ => new ClientDTO
+            {
+                MeasurementDTO = new List<MeasurementDTO>(),
+                FullName = _.FullName,
+                Program = _.Program,
+                Trainer = _.Trainer
+            }).ToList();
         }
+
     }
 }

@@ -30,6 +30,12 @@ namespace GYMApp.Controllers
         {
             trainerService.CreateTrainer(newTrainerDTO);
         }
+        // хз какой атрибут писать
+        public List<ClientDTO> GetAllTrainerClients(int TrainerID)
+        {
+            return trainerService.GetAllTrainerClients(TrainerID);
+        }
+
         [HttpPut("{TrainerID}")]
         public void UpdateTrainer(int TrainerID, [FromBody] TrainerDTO newTrainerDTO)
         {
@@ -47,9 +53,5 @@ namespace GYMApp.Controllers
             return trainerService.GetTrainersDTO();
         }
 
-        //public void AddNewReview(int TrainerID, ReviewDTO newRewievDTO)
-        //{
-        //    trainerService.AddNewReview(TrainerID, newRewievDTO);
-        //}
     }
 }

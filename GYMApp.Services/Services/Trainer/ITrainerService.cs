@@ -14,9 +14,9 @@ namespace GYMApp.Services.Services
         
         public void UpdateTrainer(int ID, TrainerDTO newTrainerDTO);
 
-        public void AddNewReview(int ID,ReviewDTO newReviewDTO); // возможно надо перенести в ReviewService
-
         public void DeleteTrainer(int TrainerID);
+
+        public List<ClientDTO> GetAllTrainerClients(int TrainerID);
 
         public List<TrainerDTO> GetTrainersDTO();
 
