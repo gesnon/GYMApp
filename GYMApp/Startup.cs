@@ -36,7 +36,7 @@ namespace GYMApp
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GYMApp", Version = "v1" });
             });
 
-            services.AddDbContext<ContextDB>(options => options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=Powerline;Trusted_Connection=true")); // эта строка новая, добавляется при подключении БД
+            services.AddDbContext<ContextDB>(options => options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=GYMDB;Trusted_Connection=true")); // эта строка новая, добавляется при подключении БД
                         
             services.AddTransient<IClientService, ClientService>();
             services.AddTransient<IMeasurementService, MeasurementService>();

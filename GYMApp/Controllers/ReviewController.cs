@@ -21,19 +21,19 @@ namespace GYMApp.Controllers
             this.reviewService = reviewService;
         }
 
-        public Review CreateReview(ReviewDTO newReviewDTO)
-        {
-            return reviewService.CreateReview(newReviewDTO);
-        }
+        //public Review CreateReview(ReviewDTO newReviewDTO)
+        //{
+        //    return reviewService.CreateReview(newReviewDTO);
+        //}
 
-        public void UpdateReview(int reviewID, ReviewDTO newReviewDTO)
-        {
-            reviewService.UpdateReview(reviewID, newReviewDTO);
-        }
+        //public void UpdateReview(int reviewID, ReviewDTO newReviewDTO)
+        //{
+        //    reviewService.UpdateReview(reviewID, newReviewDTO);
+        //}
 
-        public void DeleteReview(int ReviewID)
-        {
-            reviewService.DeleteReview(ReviewID);
-        }
+        //public void DeleteReview(int ReviewID)
+        //{
+        //    reviewService.DeleteReview(ReviewID);
+        //}
     }
 }

@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 
 namespace GYMApp.Controllers
 {
-    [ApiController]
-    [Route("[controller]/[action]")]
+    [ApiController]    
     public class ClientController : ControllerBase
     {        
         private readonly IClientService clientService;
@@ -21,52 +20,52 @@ namespace GYMApp.Controllers
             this.clientService = clientService;
         }
 
-        [HttpPut]
-        public void UpdateClient(int ClientID, ClientDTO newClientDTO)
-        {
-            clientService.UpdateClient(ClientID, newClientDTO);
-        }
-        [HttpGet]
-        public Client GetClient(int ClientID)
-        {
-            return clientService.GetClient(ClientID);
-        }
-        // хз какой атрибут писать
-        public List<Client> GetClientsByName(string Name)
-        {
-            return clientService.GetClientsByName(Name);
-        }
-        // хз какой атрибут писать
-        public void AddNewMeasurement(int ClientID, MeasurementDTO newMeasurementDTO)
-        {
+        //[HttpPut]
+        //public void UpdateClient(int ClientID, ClientDTO newClientDTO)
+        //{
+        //    clientService.UpdateClient(ClientID, newClientDTO);
+        //}
+        //[HttpGet]
+        //public Client GetClient(int ClientID)
+        //{
+        //    return clientService.GetClient(ClientID);
+        //}
+        //[Route("API/Client/GetClientsByName")]
+        //public List<Client> GetClientsByName(string Name)
+        //{
+        //    return clientService.GetClientsByName(Name);
+        //}
+        //// хз какой атрибут писать
+        //public void AddNewMeasurement(int ClientID, MeasurementDTO newMeasurementDTO)
+        //{
 
-            clientService.AddNewMeasurement(ClientID, newMeasurementDTO);
-        }
+        //    clientService.AddNewMeasurement(ClientID, newMeasurementDTO);
+        //}
 
-        [HttpPost]
-        public void AddNewClient(ClientDTO newClientDTO)
-        {
-            clientService.AddNewClient(newClientDTO);
-        }
-        // хз какой атрибут писать
-        public Client CreateClient(ClientDTO newClientDTO)
-        {
-            return clientService.CreateClient(newClientDTO);
-        }
-        // хз какой атрибут писать
-        public List<Measurement> GetMeasurements(int ClientID)
-        {
-            return clientService.GetMeasurements(ClientID);
-        }
-        // хз какой атрибут писать
-        public List<Client> GetAllTrainerClients(int TrainerID)
-        {
-            return clientService.GetAllTrainerClients(TrainerID);
-        }
-        // хз какой атрибут писать
-        public void DeleteClient(int ClientID)
-        {
-            clientService.DeleteClient(ClientID);
-        }
+        //[HttpPost]
+        //public void AddNewClient(ClientDTO newClientDTO)
+        //{
+        //    clientService.AddNewClient(newClientDTO);
+        //}
+        //// хз какой атрибут писать
+        //public Client CreateClient(ClientDTO newClientDTO)
+        //{
+        //    return clientService.CreateClient(newClientDTO);
+        //}
+        //// хз какой атрибут писать
+        //public List<Measurement> GetMeasurements(int ClientID)
+        //{
+        //    return clientService.GetMeasurements(ClientID);
+        //}
+        //// хз какой атрибут писать
+        //public List<Client> GetAllTrainerClients(int TrainerID)
+        //{
+        //    return clientService.GetAllTrainerClients(TrainerID);
+        //}
+        //// хз какой атрибут писать
+        //public void DeleteClient(int ClientID)
+        //{
+        //    clientService.DeleteClient(ClientID);
+        //}
     }
 }

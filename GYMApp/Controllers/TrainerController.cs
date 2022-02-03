@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 namespace GYMApp.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
-    public class TrainerController
+    [Route("API/Trainer")]
+    public class TrainerController : ControllerBase
     {
         private readonly ITrainerService trainerService;
 
@@ -20,29 +20,36 @@ namespace GYMApp.Controllers
             this.trainerService = trainerService;
         }
 
+        [HttpGet("{TrainerID}")]
         public Trainer GetTrainer(int TrainerID)
         {
             return trainerService.GetTrainer(TrainerID);
         }
-
-        public Trainer CreateTrainer(TrainerDTO newTrainerDTO)
+        [HttpPost]
+        public void CreateTrainer([FromBody] TrainerDTO newTrainerDTO)
         {
-            return trainerService.CreateTrainer(newTrainerDTO);
+            trainerService.CreateTrainer(newTrainerDTO);
         }
-
-        public void UpdateTrainer(int TrainewID, TrainerDTO newTrainerDTO)
+        [HttpPut("{TrainerID}")]
+        public void UpdateTrainer(int TrainerID, [FromBody] TrainerDTO newTrainerDTO)
         {
-            trainerService.UpdateTrainer(TrainewID, newTrainerDTO);
+            trainerService.UpdateTrainer(TrainerID, newTrainerDTO);
         }
-
+        [HttpDelete("{TrainerID}")]
         public void DeleteTrainer(int TrainerID)
         {
             trainerService.DeleteTrainer(TrainerID);
         }
 
-        public void AddNewReview(int TrainerID, ReviewDTO newRewievDTO)
+        [HttpGet]
+        public List<TrainerDTO> GetTrainersDTO()
         {
-            trainerService.AddNewReview(TrainerID, newRewievDTO);
+            return trainerService.GetTrainersDTO();
         }
+
+        //public void AddNewReview(int TrainerID, ReviewDTO newRewievDTO)
+        //{
+        //    trainerService.AddNewReview(TrainerID, newRewievDTO);
+        //}
     }
 }

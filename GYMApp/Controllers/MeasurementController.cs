@@ -20,19 +20,19 @@ namespace GYMApp.Controllers
             this.measurementService = measurementService;
         }
 
-        public Measurement CreateMeasurement(MeasurementDTO measurementDTO)
-        {
-            return measurementService.CreateMeasurement(measurementDTO);        
-        }
+        //public Measurement CreateMeasurement(MeasurementDTO measurementDTO)
+        //{
+        //    return measurementService.CreateMeasurement(measurementDTO);        
+        //}
 
-        public void UpdateMeasurement(int ID, MeasurementDTO measurementDTO)
-        {
-            measurementService.UpdateMeasurement(ID, measurementDTO);
-        }
+        //public void UpdateMeasurement(int ID, MeasurementDTO measurementDTO)
+        //{
+        //    measurementService.UpdateMeasurement(ID, measurementDTO);
+        //}
 
-        public void DeleteMeasurement(int MeasurementID)
-        {
-            measurementService.DeleteMeasurement(MeasurementID);
-        }
+        //public void DeleteMeasurement(int MeasurementID)
+        //{
+        //    measurementService.DeleteMeasurement(MeasurementID);
+        //}
     }
 }

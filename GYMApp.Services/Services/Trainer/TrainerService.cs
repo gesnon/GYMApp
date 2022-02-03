@@ -22,18 +22,38 @@ namespace GYMApp.Services.Services
         {
             return context.Trainers.FirstOrDefault(_ => _.ID == TrainerID);
         }
-        public Trainer CreateTrainer(TrainerDTO newTrainerDTO)
+
+        public List<TrainerDTO> GetTrainersDTO()
         {
-            return new Trainer
+            List<Trainer> trainers = context.Trainers.ToList();
+
+            List<TrainerDTO> trainerDTOs = new List<TrainerDTO>();
+
+            trainerDTOs = trainers.Select(
+                _ => new TrainerDTO
+                {
+                    FullName = _.FullName,
+                    Comments = _.Comments,
+                    ReviewsDTO = new List<ReviewDTO>()
+                }).ToList();
+
+            return trainerDTOs;
+
+        }
+
+        public void CreateTrainer(TrainerDTO newTrainerDTO)
+        {
+            Trainer newTrainer = new Trainer
             {
                 FullName = newTrainerDTO.FullName,
                 Comments = newTrainerDTO.Comments,
-                Reviews = new List<Review> { reviewService.CreateReview(newTrainerDTO.ReviewsDTO[0]) }
             };
+            context.Trainers.Add(newTrainer);
+            context.SaveChanges();
         }
-        public void UpdateTrainer(int TrainewID, TrainerDTO newTrainerDTO)
+        public void UpdateTrainer(int TrainerID, TrainerDTO newTrainerDTO)
         {
-            Trainer OldTrainer = context.Trainers.FirstOrDefault(_ => _.ID == TrainewID);
+            Trainer OldTrainer = context.Trainers.FirstOrDefault(_ => _.ID == TrainerID);
 
             if (newTrainerDTO.FullName != null)
             {
@@ -43,11 +63,7 @@ namespace GYMApp.Services.Services
             {
                 OldTrainer.Comments = newTrainerDTO.Comments;
             }
-           
-            foreach(ReviewDTO review in newTrainerDTO.ReviewsDTO)
-            {
-                OldTrainer.Reviews.Add(reviewService.CreateReview(review));//не уверен что это будет правильно работать
-            }
+
             context.SaveChanges();
         }
 
@@ -58,7 +74,7 @@ namespace GYMApp.Services.Services
             context.SaveChanges();
         }
 
-        public void AddNewReview(int TrainerID,ReviewDTO newRewievDTO)
+        public void AddNewReview(int TrainerID, ReviewDTO newRewievDTO)
         {
             context.Trainers.FirstOrDefault(_ => _.ID == TrainerID).Reviews.Add(reviewService.CreateReview(newRewievDTO));
         }
