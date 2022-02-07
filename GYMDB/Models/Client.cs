@@ -6,7 +6,7 @@ namespace GYMDB.Models
 {
     public class Client: User
     {
-        public String Trainer { get; set; }
+        public string Trainer { get; set; }
         public int? TrainerID { get; set; }
         public List<Measurement> Measurement { get; set; }
         public string Program { get; set; } // можно сделать как отдельный класс (Список из 7 записей, день недели + программа на день)

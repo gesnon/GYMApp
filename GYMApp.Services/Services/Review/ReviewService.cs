@@ -10,50 +10,37 @@ namespace GYMApp.Services.Services
 {
     public class ReviewService : IReviewService
     {
-        //private readonly ContextDB context;
-        //private readonly IClientService clientService;
-        //public ReviewService(ContextDB context, IClientService clientService)
-        //{
-        //    this.context = context;
-        //    this.clientService = clientService;
-        //}
+        private readonly ContextDB context;
+        public ReviewService(ContextDB context, IClientService clientService)
+        {
+            this.context = context;
+        }
 
-        //public Review CreateReview(ReviewDTO newReviewDTO)
-        //{
-        //    return new Review
-        //    {
-        //        Text = newReviewDTO.Text,
-        //        DateOfCreation = newReviewDTO.DateOfCreation,
-        //        ReviewCreator = clientService.CreateClient(newReviewDTO.ReviewCreatorDTO)
-        //    };
-        //}
+        public void AddNewReview(ReviewCreateDTO newReviewDTO)
+        {
+            context.Reviews.Add(new Review
+            {
+                ReviewCreatorID = newReviewDTO.CreatorID,
+                Text = newReviewDTO.Text,
+                TrainerID = newReviewDTO.TrainerID
+            });
+            context.SaveChanges();
+        }
 
-        //public void UpdateReview(int reviewID, ReviewDTO newReviewDTO)
-        //{
-        //    Review OldRewiew = context.Reviews.FirstOrDefault(_ => _.ID == reviewID);
+        public void UpdateReview(ReviewUpdateDTO newReviewDTO)
+        {
+            Review OldReview = context.Reviews.FirstOrDefault(_ => _.ID == newReviewDTO.ReviewID);
+            OldReview.Text = newReviewDTO.Text;
+            OldReview.DateOfCreation = DateTime.Now;
+            context.SaveChanges();
+        }
 
-        //    if (newReviewDTO.Text != null)
-        //    {
-        //        OldRewiew.Text = newReviewDTO.Text;
-        //    }
-        //    if (newReviewDTO.DateOfCreation != null)
-        //    {
-        //        OldRewiew.DateOfCreation = newReviewDTO.DateOfCreation;
-        //    }
-        //    if (newReviewDTO.ReviewCreatorDTO != null)
-        //    {
-        //        OldRewiew.ReviewCreator = clientService.CreateClient(newReviewDTO.ReviewCreatorDTO);
-        //    }
+        public void DeleteReview(int ReviewID)
+        {
+            context.Reviews.Remove(context.Reviews.FirstOrDefault(_ => _.ID == ReviewID));
 
-        //    context.SaveChanges();
-        //}
-
-        //public void DeleteReview(int ReviewID)
-        //{
-        //    context.Reviews.Remove(context.Reviews.FirstOrDefault(_ => _.ID == ReviewID));
-
-        //    context.SaveChanges();
-        //}
+            context.SaveChanges();
+        }
 
     }
 }

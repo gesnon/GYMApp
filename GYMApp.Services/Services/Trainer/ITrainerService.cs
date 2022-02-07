@@ -10,15 +10,13 @@ namespace GYMApp.Services.Services
     {
         public Trainer GetTrainer(int TrainerID);
 
-        public void CreateTrainer(TrainerDTO newTrainerDTO);
+        public void CreateTrainer(TrainerCreateDTO newTrainerDTO);
         
-        public void UpdateTrainer(int ID, TrainerDTO newTrainerDTO);
+        public void UpdateTrainer(int ID, TrainerCreateDTO newTrainerDTO);
 
         public void DeleteTrainer(int TrainerID);
 
-        public List<ClientDTO> GetAllTrainerClients(int TrainerID);
-
-        public List<TrainerDTO> GetTrainersDTO();
+        public List<TrainerCreateDTO> GetTrainersDTO();
 
     }
 }

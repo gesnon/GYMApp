@@ -23,14 +23,14 @@ namespace GYMApp.Services.Services
             return context.Trainers.FirstOrDefault(_ => _.ID == TrainerID);
         }
 
-        public List<TrainerDTO> GetTrainersDTO()
+        public List<TrainerCreateDTO> GetTrainersDTO()
         {
             List<Trainer> trainers = context.Trainers.ToList();
 
-            List<TrainerDTO> trainerDTOs = new List<TrainerDTO>();
+            List<TrainerCreateDTO> trainerDTOs = new List<TrainerCreateDTO>();
 
             trainerDTOs = trainers.Select(
-                _ => new TrainerDTO
+                _ => new TrainerCreateDTO
                 {
                     FullName = _.FullName,
                     Comments = _.Comments,
@@ -41,7 +41,7 @@ namespace GYMApp.Services.Services
 
         }
 
-        public void CreateTrainer(TrainerDTO newTrainerDTO)
+        public void CreateTrainer(TrainerCreateDTO newTrainerDTO)
         {
             Trainer newTrainer = new Trainer
             {
@@ -51,7 +51,7 @@ namespace GYMApp.Services.Services
             context.Trainers.Add(newTrainer);
             context.SaveChanges();
         }
-        public void UpdateTrainer(int TrainerID, TrainerDTO newTrainerDTO)
+        public void UpdateTrainer(int TrainerID, TrainerCreateDTO newTrainerDTO)
         {
             Trainer OldTrainer = context.Trainers.FirstOrDefault(_ => _.ID == TrainerID);
 
@@ -74,16 +74,6 @@ namespace GYMApp.Services.Services
             context.SaveChanges();
         }
 
-        public List<ClientDTO> GetAllTrainerClients(int TrainerID)
-        {
-            return context.Clients.Where(_ => _.TrainerID == TrainerID).Select(_ => new ClientDTO
-            {
-                MeasurementDTO = new List<MeasurementDTO>(),
-                FullName = _.FullName,
-                Program = _.Program,
-                Trainer = _.Trainer
-            }).ToList();
-        }
 
     }
 }

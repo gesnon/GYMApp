@@ -9,10 +9,9 @@ namespace GYMApp.Services.Services
     public interface IReviewService
     {
 
-        //public Review CreateReview(ReviewDTO newReviewDTO);
+        public void UpdateReview(ReviewUpdateDTO newReviewDTO);
+        public void DeleteReview(int ReviewID);
+        public void AddNewReview(ReviewCreateDTO newReviewDTO);
 
-        //public void UpdateReview(int ID, ReviewDTO newReviewDTO);
-
-        //public void DeleteReview(int ReviewID);
     }
 }

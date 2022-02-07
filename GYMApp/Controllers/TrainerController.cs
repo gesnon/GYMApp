@@ -26,18 +26,13 @@ namespace GYMApp.Controllers
             return trainerService.GetTrainer(TrainerID);
         }
         [HttpPost]
-        public void CreateTrainer([FromBody] TrainerDTO newTrainerDTO)
+        public void CreateTrainer([FromBody] TrainerCreateDTO newTrainerDTO)
         {
             trainerService.CreateTrainer(newTrainerDTO);
         }
-        // хз какой атрибут писать
-        public List<ClientDTO> GetAllTrainerClients(int TrainerID)
-        {
-            return trainerService.GetAllTrainerClients(TrainerID);
-        }
 
         [HttpPut("{TrainerID}")]
-        public void UpdateTrainer(int TrainerID, [FromBody] TrainerDTO newTrainerDTO)
+        public void UpdateTrainer(int TrainerID, [FromBody] TrainerCreateDTO newTrainerDTO)
         {
             trainerService.UpdateTrainer(TrainerID, newTrainerDTO);
         }
@@ -48,7 +43,7 @@ namespace GYMApp.Controllers
         }
 
         [HttpGet]
-        public List<TrainerDTO> GetTrainersDTO()
+        public List<TrainerCreateDTO> GetTrainersDTO()
         {
             return trainerService.GetTrainersDTO();
         }

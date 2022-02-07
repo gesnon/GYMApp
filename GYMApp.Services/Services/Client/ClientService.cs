@@ -13,15 +13,15 @@ namespace GYMApp.Services.Services
     {
         private readonly ContextDB context;
         private readonly IMeasurementService measurementService;
-        
+
 
         public ClientService(ContextDB context, IMeasurementService measurementService)
         {
             this.context = context;
-            this.measurementService = measurementService;            
+            this.measurementService = measurementService;
         }
 
-        public void UpdateClient(int ClientID, ClientDTO newClientDTO)
+        public void UpdateClient(int ClientID, ClientCreateDTO newClientDTO)
         {
             Client OldClient = context.Clients.FirstOrDefault(_ => _.ID == ClientID);
 
@@ -58,20 +58,36 @@ namespace GYMApp.Services.Services
         }
 
 
-        public void CreateClient(ClientDTO newClientDTO)   // Не уверен что этот медот должен быть в сервисе клиента 
+        public void CreateClient(ClientCreateDTO newClientDTO)   // Не уверен что этот медот должен быть в сервисе клиента 
         {
             context.Clients.Add(new Client
             {
                 FullName = newClientDTO.FullName,
                 Program = newClientDTO.Program,
-                Measurement = new List<Measurement>() ,
-                Trainer = newClientDTO.Trainer,
-                TrainerID = context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).ID,
+                Measurement = new List<Measurement>(),
+                Trainer = newClientDTO.Trainer
             });
 
             context.SaveChanges();
         }
 
+        public List<ClientCreateDTO> GetAllClientsDTO()
+        {
+            List<Client> clients = context.Clients.ToList();
+
+            List<ClientCreateDTO> clientDTOs = new List<ClientCreateDTO>();
+
+            clientDTOs = clients.Select(
+                _ => new ClientCreateDTO
+                {
+                    FullName=_.FullName,
+                    MeasurementDTO=new List<MeasurementDTO>(),
+                    Program=_.Program,
+                    Trainer=_.Trainer
+                }).ToList();
+
+            return clientDTOs;
+        }
 
         public void DeleteClient(int ClientID)
         {

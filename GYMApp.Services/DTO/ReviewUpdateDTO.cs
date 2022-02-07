@@ -4,12 +4,11 @@ using System.Text;
 
 namespace GYMApp.Services.DTO
 {
-    public class ReviewDTO
+    public class ReviewUpdateDTO
     {
         public string Text { get; set; }
 
-        public DateTime DateOfCreation { get; set; }
+        public int ReviewID { get; set; }
 
-        public ClientCreateDTO ReviewCreatorDTO { get; set; }
     }
 }
