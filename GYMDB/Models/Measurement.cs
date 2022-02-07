@@ -6,7 +6,8 @@ namespace GYMDB.Models
 {
     public class Measurement
     {
-        public DateTime DateOfCreation { get; set; }
+        public DateTime DateOfCreation { get; set; } = DateTime.Now;
+
         public int LeftArm { get; set; }
 
         public int RightArm { get; set; }
@@ -21,7 +22,8 @@ namespace GYMDB.Models
 
         public int Height { get; set; }
 
-        public int ID { get; set; } // не уверен что тут это нужно, ведь замеров будет довольно много
+        public int MeasurementID { get; set; }
 
+        public int ClientID { get; set; }
     }
 }

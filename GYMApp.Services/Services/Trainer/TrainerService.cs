@@ -11,12 +11,10 @@ namespace GYMApp.Services.Services
     public class TrainerService : ITrainerService
     {
         private readonly ContextDB context;
-        private readonly IReviewService reviewService;
 
         public TrainerService(ContextDB context, IReviewService reviewService)
         {
             this.context = context;
-            this.reviewService = reviewService;
         }
         public Trainer GetTrainer(int TrainerID)
         {

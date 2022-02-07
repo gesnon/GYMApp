@@ -12,13 +12,12 @@ namespace GYMApp.Services.Services
     public class ClientService : IClientService
     {
         private readonly ContextDB context;
-        private readonly IMeasurementService measurementService;
+
 
 
         public ClientService(ContextDB context, IMeasurementService measurementService)
         {
             this.context = context;
-            this.measurementService = measurementService;
         }
 
         public void UpdateClient(int ClientID, ClientCreateDTO newClientDTO)
@@ -30,19 +29,7 @@ namespace GYMApp.Services.Services
                 OldClient.FullName = newClientDTO.FullName;
 
             }
-
-            if (newClientDTO.Program != null)
-            {
-                OldClient.Program = newClientDTO.Program;
-
-            }
-
-            if (newClientDTO.Trainer != null)
-            {
-                OldClient.Trainer = newClientDTO.Trainer;
-
-                OldClient.TrainerID = context.Trainers.FirstOrDefault(_ => _.FullName == newClientDTO.Trainer).ID;
-            }
+    
 
             context.SaveChanges();
         }
@@ -63,9 +50,8 @@ namespace GYMApp.Services.Services
             context.Clients.Add(new Client
             {
                 FullName = newClientDTO.FullName,
-                Program = newClientDTO.Program,
                 Measurement = new List<Measurement>(),
-                Trainer = newClientDTO.Trainer
+
             });
 
             context.SaveChanges();
@@ -81,9 +67,6 @@ namespace GYMApp.Services.Services
                 _ => new ClientCreateDTO
                 {
                     FullName=_.FullName,
-                    MeasurementDTO=new List<MeasurementDTO>(),
-                    Program=_.Program,
-                    Trainer=_.Trainer
                 }).ToList();
 
             return clientDTOs;
