@@ -20,19 +20,36 @@ namespace GYMApp.Controllers
             this.measurementService = measurementService;
         }
 
-        //public Measurement CreateMeasurement(MeasurementDTO measurementDTO)
-        //{
-        //    return measurementService.CreateMeasurement(measurementDTO);
-        //}
+        [HttpPost]
+        public void AddNewMeasurement([FromBody] MeasurementDTO measurementDTO)
+        {
+            measurementService.AddNewMeasurement(measurementDTO);
 
-        //public void UpdateMeasurement(int ID, MeasurementDTO measurementDTO)
-        //{
-        //    measurementService.UpdateMeasurement(ID, measurementDTO);
-        //}
+        }
+        [HttpPut]
+        public void UpdateMeasurement([FromBody] MeasurementUpdateDTO newMeasurementDTO)
+        {
+            measurementService.UpdateMeasurement(newMeasurementDTO);
+        }
 
-        //public void DeleteMeasurement(int MeasurementID)
-        //{
-        //    measurementService.DeleteMeasurement(MeasurementID);
-        //}
+        [HttpDelete("{MeasurementID}")]
+        public void DeleteMeasurement(int MeasurementID)
+        {
+            measurementService.DeleteMeasurement(MeasurementID);
+        }
+
+        [HttpGet("GetAllClientsMeasurements/{ClientID}")]
+        public List<MeasurementDTO> GetAllClientsMeasurements(int ClientID)
+        {
+            List<MeasurementDTO> measurementDTOs = new List<MeasurementDTO>();
+
+            return measurementService.GetAllClientsMeasurements(ClientID);
+        }
+
+        [HttpGet("GetLastClientMeasurement/{ClientID}")]
+        public MeasurementDTO GetLastClientMeasurement(int ClientID)
+        {
+            return measurementService.GetLastClientMeasurement(ClientID);
+        }
     }
 }

@@ -28,10 +28,11 @@ namespace GYMApp.Services.Services
                 Chest = measurementDTO.Chest,
                 Weight = measurementDTO.Weight,
                 Height = measurementDTO.Height,
-                ClientID = measurementDTO.ClientID
+                ClientID = measurementDTO.ClientID,
+                
 
             });
-
+            context.SaveChanges();
         }
 
         public void UpdateMeasurement(MeasurementUpdateDTO newMeasurementDTO)
