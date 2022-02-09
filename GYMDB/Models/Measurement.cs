@@ -22,7 +22,7 @@ namespace GYMDB.Models
 
         public int Height { get; set; }
 
-        public int MeasurementID { get; set; }
+        public int ID { get; set; }
 
         public int ClientID { get; set; }
     }

@@ -37,7 +37,7 @@ namespace GYMApp.Services.Services
 
         public void UpdateMeasurement(MeasurementUpdateDTO newMeasurementDTO)
         {
-            Measurement OldMeasurement = context.Measurements.FirstOrDefault(_ => _.MeasurementID == newMeasurementDTO.MeasurementID);
+            Measurement OldMeasurement = context.Measurements.FirstOrDefault(_ => _.ID == newMeasurementDTO.MeasurementID);
 
             OldMeasurement.LeftArm = newMeasurementDTO.LeftArm;
             OldMeasurement.RightArm = newMeasurementDTO.RightArm;
@@ -53,7 +53,7 @@ namespace GYMApp.Services.Services
 
         public void DeleteMeasurement(int MeasurementID)
         {
-            context.Measurements.Remove(context.Measurements.FirstOrDefault(_ => _.MeasurementID == MeasurementID));
+            context.Measurements.Remove(context.Measurements.FirstOrDefault(_ => _.ID == MeasurementID));
 
             context.SaveChanges();
         }
@@ -80,8 +80,8 @@ namespace GYMApp.Services.Services
 
         public MeasurementDTO GetLastClientMeasurement(int ClientID)
         {
-            List<Measurement> measurements = context.Clients.FirstOrDefault(_ => _.ID == ClientID).Measurement;
-            Measurement measurement = measurements[measurements.Count - 1];
+            Measurement measurement = context.Measurements.Where(_ => _.ClientID == ClientID).OrderByDescending(_ => _.DateOfCreation).FirstOrDefault();
+            
             MeasurementDTO measurementDTO = new MeasurementDTO
             {
                 LeftArm = measurement.LeftArm,
