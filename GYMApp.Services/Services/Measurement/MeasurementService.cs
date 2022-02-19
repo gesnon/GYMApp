@@ -29,7 +29,6 @@ namespace GYMApp.Services.Services
                 Weight = measurementDTO.Weight,
                 Height = measurementDTO.Height,
                 ClientID = measurementDTO.ClientID,
-                
 
             });
             context.SaveChanges();
@@ -38,6 +37,11 @@ namespace GYMApp.Services.Services
         public void UpdateMeasurement(MeasurementUpdateDTO newMeasurementDTO)
         {
             Measurement OldMeasurement = context.Measurements.FirstOrDefault(_ => _.ID == newMeasurementDTO.MeasurementID);
+
+            if (OldMeasurement == null)
+            {
+                throw new Exception("Замер не найден");
+            }
 
             OldMeasurement.LeftArm = newMeasurementDTO.LeftArm;
             OldMeasurement.RightArm = newMeasurementDTO.RightArm;
@@ -49,10 +53,15 @@ namespace GYMApp.Services.Services
             OldMeasurement.DateOfCreation = DateTime.Now;
 
             context.SaveChanges();
+
         }
 
         public void DeleteMeasurement(int MeasurementID)
         {
+            if (context.Measurements.FirstOrDefault(_ => _.ID == MeasurementID) == null)
+            {
+                throw new Exception("Замер не найден");
+            }
             context.Measurements.Remove(context.Measurements.FirstOrDefault(_ => _.ID == MeasurementID));
 
             context.SaveChanges();
@@ -60,6 +69,11 @@ namespace GYMApp.Services.Services
 
         public List<MeasurementDTO> GetAllClientsMeasurements(int ClientID)
         {
+            if (context.Clients.FirstOrDefault(_ => _.ID == ClientID) == null)
+            {
+                throw new Exception("Клиент не найден");
+            }
+
             List<MeasurementDTO> measurementDTOs = new List<MeasurementDTO>();
 
             measurementDTOs = context.Measurements.Where(_ => _.ClientID == ClientID).Select(_ => new MeasurementDTO
@@ -80,8 +94,13 @@ namespace GYMApp.Services.Services
 
         public MeasurementDTO GetLastClientMeasurement(int ClientID)
         {
+            if (context.Clients.FirstOrDefault(_ => _.ID == ClientID) == null)
+            {
+                throw new Exception("Клиент не найден");
+            }
+
             Measurement measurement = context.Measurements.Where(_ => _.ClientID == ClientID).OrderByDescending(_ => _.DateOfCreation).FirstOrDefault();
-            
+
             MeasurementDTO measurementDTO = new MeasurementDTO
             {
                 LeftArm = measurement.LeftArm,
@@ -96,5 +115,6 @@ namespace GYMApp.Services.Services
             };
             return measurementDTO;                             //Выглядит стремно, 100% можно сделать проще
         }
+
     }
 }

@@ -18,6 +18,11 @@ namespace GYMApp.Services.Services
         }
         public Trainer GetTrainer(int TrainerID)
         {
+            if (context.Trainers.FirstOrDefault(_ => _.ID == TrainerID) == null)
+            {
+                throw new Exception("Тренер не найдён");
+            }
+
             return context.Trainers.FirstOrDefault(_ => _.ID == TrainerID);
         }
 
@@ -53,6 +58,11 @@ namespace GYMApp.Services.Services
         {
             Trainer OldTrainer = context.Trainers.FirstOrDefault(_ => _.ID == TrainerID);
 
+            if (OldTrainer == null)
+            {
+                throw new Exception("Тренер не найдён");
+            }
+
             if (newTrainerDTO.FullName != null)
             {
                 OldTrainer.FullName = newTrainerDTO.FullName;
@@ -67,6 +77,11 @@ namespace GYMApp.Services.Services
 
         public void DeleteTrainer(int TrainerID)
         {
+            if (context.Trainers.FirstOrDefault(_ => _.ID == TrainerID) == null)
+            {
+                throw new Exception("Тренер не найдён");
+            }
+
             context.Trainers.Remove(context.Trainers.FirstOrDefault(_ => _.ID == TrainerID));
 
             context.SaveChanges();

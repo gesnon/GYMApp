@@ -24,6 +24,11 @@ namespace GYMApp.Services.Services
         {
             Client OldClient = context.Clients.FirstOrDefault(_ => _.ID == ClientID);
 
+            if (OldClient == null)
+            {
+                throw new Exception("Клиент не найдён");
+            }
+
             if (newClientDTO.FullName != null)
             {
                 OldClient.FullName = newClientDTO.FullName;
@@ -36,12 +41,24 @@ namespace GYMApp.Services.Services
 
         public Client GetClient(int ClientID)
         {
+            if (context.Clients.FirstOrDefault(_ => _.ID == ClientID) == null)
+            {
+                throw new Exception("Клиент не найдён");
+            }
+
             return context.Clients.FirstOrDefault(_ => _.ID == ClientID);
         }
 
         public List<Client> GetClientsByName(string Name)
         {
-            return context.Clients.Where(_ => _.FullName.Contains(Name)).ToList();
+            List<Client> clients = context.Clients.Where(_ => _.FullName.Contains(Name)).ToList();
+
+            if (clients.Count == 0)
+            {
+                throw new Exception("Клиенты с таким именем не найдёны"); // Не уверен что это правильно
+            }
+            
+            return clients;
         }
 
 
@@ -74,6 +91,11 @@ namespace GYMApp.Services.Services
 
         public void DeleteClient(int ClientID)
         {
+            if (context.Clients.FirstOrDefault(_ => _.ID == ClientID) == null)
+            {
+                throw new Exception("Клиент не найдён");
+            }
+
             context.Clients.Remove(context.Clients.FirstOrDefault(_ => _.ID == ClientID));
 
             context.SaveChanges();

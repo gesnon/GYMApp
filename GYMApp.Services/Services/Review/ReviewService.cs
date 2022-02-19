@@ -30,6 +30,12 @@ namespace GYMApp.Services.Services
         public void UpdateReview(ReviewUpdateDTO newReviewDTO)
         {
             Review OldReview = context.Reviews.FirstOrDefault(_ => _.ID == newReviewDTO.ReviewID);
+
+            if (OldReview == null)
+            {
+                throw new Exception("Отзыв не найдён");
+            }
+
             OldReview.Text = newReviewDTO.Text;
             OldReview.DateOfCreation = DateTime.Now;
             context.SaveChanges();
@@ -37,6 +43,11 @@ namespace GYMApp.Services.Services
 
         public void DeleteReview(int ReviewID)
         {
+            if (context.Reviews.FirstOrDefault(_ => _.ID == ReviewID) == null)
+            {
+                throw new Exception("Отзыв не найдён");
+            }
+        
             context.Reviews.Remove(context.Reviews.FirstOrDefault(_ => _.ID == ReviewID));
 
             context.SaveChanges();
