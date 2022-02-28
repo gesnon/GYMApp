@@ -12,7 +12,7 @@ namespace GYMApp.Services.Services
         public void UpdateClient(int ID, ClientCreateDTO newClientDTO);
         public Client GetClient(int ClientID);
         public List<Client> GetClientsByName(string Name); // ищет contains, а не ==
-        public List<ClientCreateDTO> GetAllClientsDTO();
+        public List<ClientsListDTO> GetAllClientsDTO();
         public void DeleteClient(int ClientID);
     }
 }

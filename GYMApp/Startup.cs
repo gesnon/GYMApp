@@ -37,7 +37,7 @@ namespace GYMApp
             });
 
             services.AddDbContext<ContextDB>(options => options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=GYMDB;Trusted_Connection=true")); // эта строка новая, добавляется при подключении БД
-                        
+
             services.AddTransient<IClientService, ClientService>();
             services.AddTransient<IMeasurementService, MeasurementService>();
             services.AddTransient<ITrainerService, TrainerService>();
@@ -55,7 +55,7 @@ namespace GYMApp
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors(c => c.AllowAnyOrigin());
             app.UseRouting();
 
             app.UseAuthorization();

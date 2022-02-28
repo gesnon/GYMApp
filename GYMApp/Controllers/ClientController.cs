@@ -50,8 +50,8 @@ namespace GYMApp.Controllers
             clientService.DeleteClient(ClientID);
         }
 
-        [HttpPut]
-        public List<ClientCreateDTO> GetAllClientsDTO()
+        [HttpGet]
+        public List<ClientsListDTO> GetAllClientsDTO()
         {
            return  clientService.GetAllClientsDTO();
         }

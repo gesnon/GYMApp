@@ -38,7 +38,7 @@ namespace GYMApp.Controllers
             measurementService.DeleteMeasurement(MeasurementID);
         }
 
-        [HttpGet("GetAllClientsMeasurements/{ClientID}")]
+        [HttpGet("{ClientID}")]
         public List<MeasurementDTO> GetAllClientsMeasurements(int ClientID)
         {
             List<MeasurementDTO> measurementDTOs = new List<MeasurementDTO>();
@@ -46,7 +46,7 @@ namespace GYMApp.Controllers
             return measurementService.GetAllClientsMeasurements(ClientID);
         }
 
-        [HttpGet("GetLastClientMeasurement/{ClientID}")]
+        [HttpGet("{ClientID}")]
         public MeasurementDTO GetLastClientMeasurement(int ClientID)
         {
             return measurementService.GetLastClientMeasurement(ClientID);

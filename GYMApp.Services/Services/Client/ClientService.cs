@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace GYMApp.Services.Services
 {
@@ -74,16 +74,18 @@ namespace GYMApp.Services.Services
             context.SaveChanges();
         }
 
-        public List<ClientCreateDTO> GetAllClientsDTO()
+        public List<ClientsListDTO> GetAllClientsDTO()
         {
-            List<Client> clients = context.Clients.ToList();
+            List<Client> clients = context.Clients.Include(_=>_.Trainer).Include(_=>_.Measurement).ToList();
 
-            List<ClientCreateDTO> clientDTOs = new List<ClientCreateDTO>();
+            List<ClientsListDTO> clientDTOs = new List<ClientsListDTO>();
 
             clientDTOs = clients.Select(
-                _ => new ClientCreateDTO
+                _ => new ClientsListDTO
                 {
                     FullName=_.FullName,
+                    Trainer=_.Trainer.FullName,
+                    LastMeasurementDate = _.Measurement.OrderByDescending(_=>_.DateOfCreation).FirstOrDefault()?.DateOfCreation.ToString("dd.MM.yyyy")
                 }).ToList();
 
             return clientDTOs;

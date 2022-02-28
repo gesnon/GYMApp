@@ -43,7 +43,7 @@ namespace GYMApp.Controllers
         }
 
         [HttpGet]
-        public List<TrainerCreateDTO> GetTrainersDTO()
+        public List<TrainerProfileDTO> GetTrainersDTO()
         {
             return trainerService.GetTrainersDTO();
         }

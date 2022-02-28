@@ -26,14 +26,14 @@ namespace GYMApp.Services.Services
             return context.Trainers.FirstOrDefault(_ => _.ID == TrainerID);
         }
 
-        public List<TrainerCreateDTO> GetTrainersDTO()
+        public List<TrainerProfileDTO> GetTrainersDTO()
         {
             List<Trainer> trainers = context.Trainers.ToList();
 
-            List<TrainerCreateDTO> trainerDTOs = new List<TrainerCreateDTO>();
+            List<TrainerProfileDTO> trainerDTOs = new List<TrainerProfileDTO>();
 
             trainerDTOs = trainers.Select(
-                _ => new TrainerCreateDTO
+                _ => new TrainerProfileDTO
                 {
                     FullName = _.FullName,
                     Comments = _.Comments,
