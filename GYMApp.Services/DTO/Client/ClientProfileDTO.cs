@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GYMDB.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +9,10 @@ namespace GYMApp.Services.DTO
     {   
         public string FullName { get; set; }
         public string Trainer { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public DateTime BirthDate { get; set; }
         public int? TrainerID { get; set; }
-        public string Program { get; set; }
+        public ClientRoutineDTO ClientRoutineDTO { get; set; }
     }
 }

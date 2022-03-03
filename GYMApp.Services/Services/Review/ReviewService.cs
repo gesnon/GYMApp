@@ -11,7 +11,7 @@ namespace GYMApp.Services.Services
     public class ReviewService : IReviewService
     {
         private readonly ContextDB context;
-        public ReviewService(ContextDB context, IClientService clientService)
+        public ReviewService(ContextDB context)
         {
             this.context = context;
         }
@@ -22,7 +22,8 @@ namespace GYMApp.Services.Services
             {
                 ReviewCreatorID = newReviewDTO.CreatorID,
                 Text = newReviewDTO.Text,
-                TrainerID = newReviewDTO.TrainerID
+                TrainerID = newReviewDTO.TrainerID,
+                DateOfCreation = DateTime.Now
             });
             context.SaveChanges();
         }

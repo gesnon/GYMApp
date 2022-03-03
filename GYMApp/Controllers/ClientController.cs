@@ -21,13 +21,13 @@ namespace GYMApp.Controllers
         }
 
         [HttpPut("{ClientID}")]
-        public void UpdateClient(int ClientID, [FromBody] ClientCreateDTO newClientDTO)
+        public void UpdateClient(int ClientID, [FromBody] ClientUpdateDTO newClientDTO)
         {
             clientService.UpdateClient(ClientID, newClientDTO);
         }
 
         [HttpGet("{ClientID}")]
-        public Client GetClient(int ClientID)
+        public ClientProfileDTO GetClient(int ClientID)
         {
             return clientService.GetClient(ClientID);
         }
@@ -51,7 +51,7 @@ namespace GYMApp.Controllers
         }
 
         [HttpGet]
-        public List<ClientsListDTO> GetAllClientsDTO()
+        public List<GetAllClientsDTO> GetAllClientsDTO()
         {
            return  clientService.GetAllClientsDTO();
         }

@@ -9,10 +9,10 @@ namespace GYMApp.Services.Services
     public interface IClientService
     {        
         public void CreateClient(ClientCreateDTO newClientDTO);
-        public void UpdateClient(int ID, ClientCreateDTO newClientDTO);
-        public Client GetClient(int ClientID);
+        public void UpdateClient(int ID, ClientUpdateDTO newClientUpdateDTO);
+        public ClientProfileDTO GetClient(int ClientID);
         public List<Client> GetClientsByName(string Name); // ищет contains, а не ==
-        public List<ClientsListDTO> GetAllClientsDTO();
+        public List<GetAllClientsDTO> GetAllClientsDTO();
         public void DeleteClient(int ClientID);
     }
 }

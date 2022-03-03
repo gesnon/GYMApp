@@ -9,10 +9,8 @@ namespace GYMDB.Models
         public Trainer Trainer { get; set; }
         public int? TrainerID { get; set; }
         public List<Measurement> Measurement { get; set; }
-        public string Program { get; set; } // можно сделать как отдельный класс (Список из 7 записей, день недели + программа на день)
-    
+        public List<ClientRoutine> ClientRoutines { get; set; }         
 
     }
 }
 
-// можно добавить поля // диета,

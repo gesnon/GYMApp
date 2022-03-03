@@ -12,15 +12,12 @@ namespace GYMApp.Services.Services
     public class ClientService : IClientService
     {
         private readonly ContextDB context;
-
-
-
-        public ClientService(ContextDB context, IMeasurementService measurementService)
+        public ClientService(ContextDB context)
         {
             this.context = context;
         }
 
-        public void UpdateClient(int ClientID, ClientCreateDTO newClientDTO)
+        public void UpdateClient(int ClientID, ClientUpdateDTO newClientUpdateDTO)
         {
             Client OldClient = context.Clients.FirstOrDefault(_ => _.ID == ClientID);
 
@@ -29,24 +26,42 @@ namespace GYMApp.Services.Services
                 throw new Exception("Клиент не найдён");
             }
 
-            if (newClientDTO.FullName != null)
-            {
-                OldClient.FullName = newClientDTO.FullName;
-
-            }
-    
+            OldClient.FullName = newClientUpdateDTO.FullName;
+            OldClient.PhoneNumber = newClientUpdateDTO.PhoneNumber;
+            OldClient.Email = newClientUpdateDTO.Email;
+            OldClient.BirthDate = newClientUpdateDTO.BirthDate;
+            OldClient.TrainerID = newClientUpdateDTO.TrainerID;
 
             context.SaveChanges();
         }
 
-        public Client GetClient(int ClientID)
+        public ClientProfileDTO GetClient(int ClientID)
         {
             if (context.Clients.FirstOrDefault(_ => _.ID == ClientID) == null)
             {
                 throw new Exception("Клиент не найдён");
             }
 
-            return context.Clients.FirstOrDefault(_ => _.ID == ClientID);
+            Client client = context.Clients.Include(_ => _.Trainer).Include(_ => _.ClientRoutines).ThenInclude(_ => _.Routine).ThenInclude(_=>_.RoutineExercises).ThenInclude(_=>_.Exercise).FirstOrDefault(_ => _.ID == ClientID);
+
+            ClientRoutine clientRoutine = client.ClientRoutines.OrderByDescending(_ => _.RoutineDate).First();
+
+
+            
+            return new ClientProfileDTO
+            {
+                FullName = client.FullName,
+                PhoneNumber = client.PhoneNumber,
+                Email = client.Email,
+                BirthDate = client.BirthDate,
+                Trainer = client.Trainer.FullName,
+                TrainerID = client.TrainerID,
+                ClientRoutineDTO = new ClientRoutineDTO
+                {
+                    Exercises = clientRoutine.Routine.RoutineExercises.Select(_=>_.Exercise.Name).ToList(),                    
+                    RoutineDate = clientRoutine.RoutineDate
+                }
+            };
         }
 
         public List<Client> GetClientsByName(string Name)
@@ -57,7 +72,7 @@ namespace GYMApp.Services.Services
             {
                 throw new Exception("Клиенты с таким именем не найдёны"); // Не уверен что это правильно
             }
-            
+
             return clients;
         }
 
@@ -74,18 +89,20 @@ namespace GYMApp.Services.Services
             context.SaveChanges();
         }
 
-        public List<ClientsListDTO> GetAllClientsDTO()
+        public List<GetAllClientsDTO> GetAllClientsDTO()
         {
-            List<Client> clients = context.Clients.Include(_=>_.Trainer).Include(_=>_.Measurement).ToList();
+            List<Client> clients = context.Clients.Include(_ => _.Trainer).Include(_ => _.Measurement).ToList();
 
-            List<ClientsListDTO> clientDTOs = new List<ClientsListDTO>();
+            List<GetAllClientsDTO> clientDTOs = new List<GetAllClientsDTO>();
 
             clientDTOs = clients.Select(
-                _ => new ClientsListDTO
+                _ => new GetAllClientsDTO
                 {
-                    FullName=_.FullName,
-                    Trainer=_.Trainer.FullName,
-                    LastMeasurementDate = _.Measurement.OrderByDescending(_=>_.DateOfCreation).FirstOrDefault()?.DateOfCreation.ToString("dd.MM.yyyy")
+                    FullName = _.FullName,
+                    Trainer = _.Trainer.FullName,
+                    LastMeasurementDate = _.Measurement.OrderByDescending(_ => _.DateOfCreation).FirstOrDefault()?.DateOfCreation.ToString("dd.MM.yyyy"),
+                    PhoneNumber = _.PhoneNumber,
+                    Email = _.Email
                 }).ToList();
 
             return clientDTOs;

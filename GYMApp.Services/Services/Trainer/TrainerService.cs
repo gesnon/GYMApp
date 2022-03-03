@@ -12,7 +12,7 @@ namespace GYMApp.Services.Services
     {
         private readonly ContextDB context;
 
-        public TrainerService(ContextDB context, IReviewService reviewService)
+        public TrainerService(ContextDB context)
         {
             this.context = context;
         }

@@ -7,6 +7,7 @@ namespace GYMApp.Services.DTO
     public class ClientCreateDTO
     {
         public string FullName { get; set; }
-        
+
+        public DateTime BirthDate { get; set; }
     }
 }
