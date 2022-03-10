@@ -1,0 +1,44 @@
+.w3-sidebar{
+    height: 50%;    
+    background-color:#fff;
+    overflow:auto;
+    width: 15%; 
+    margin-left: 3%;
+    font-weight: 500;
+    margin-top: 5%;  
+    background: #855656;  
+  }
+  
+.w3-bar-block .w3-bar-item {
+    display: block;
+    padding: 8px 16px;
+    text-align: left;
+    border: none;
+    white-space: normal;
+    float: none;
+    outline: 0;
+  }
+
+.w3-light-grey,.w3-hover-light-grey:hover,.w3-light-gray,.w3-hover-light-gray:hover{
+      color:#000!important;
+      
+    }
+
+    .w3-button {
+        border: none;
+        display: inline-block;
+        padding: 8px 16px;
+        vertical-align: middle;
+        overflow: hidden;
+        text-decoration: none;
+        color: inherit;
+        background-color: inherit;
+        text-align: center;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+    .w3-button:hover {
+        color: #000!important;
+        background-color: #ccc!important;
+    }
