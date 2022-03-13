@@ -20,7 +20,7 @@ namespace GYMApp.Services.DTO
 
         public int Height { get; set; }
         
-        public DateTime DateOFCreation { get; set; }
+        public DateTime DateOfCreation { get; set; }
 
         public int ClientID { get; set; }
 

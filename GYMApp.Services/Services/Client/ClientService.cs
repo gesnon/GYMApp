@@ -42,12 +42,20 @@ namespace GYMApp.Services.Services
                 throw new Exception("Клиент не найдён");
             }
 
-            Client client = context.Clients.Include(_ => _.Trainer).Include(_ => _.ClientRoutines).ThenInclude(_ => _.Routine).ThenInclude(_=>_.RoutineExercises).ThenInclude(_=>_.Exercise).FirstOrDefault(_ => _.ID == ClientID);
+            Client client = context.Clients.Include(_ => _.Trainer).Include(_ => _.ClientRoutines).ThenInclude(_ => _.Routine).ThenInclude(_ => _.RoutineExercises).ThenInclude(_ => _.Exercise).FirstOrDefault(_ => _.ID == ClientID);
 
-            ClientRoutine clientRoutine = client.ClientRoutines.OrderByDescending(_ => _.RoutineDate).First();
+            ClientRoutine clientRoutine = client.ClientRoutines.OrderByDescending(_ => _.RoutineDate).FirstOrDefault();
 
+            ClientRoutineDTO clientRoutineDto = null;
+            if (clientRoutine != null)
+            {
+                clientRoutineDto = new ClientRoutineDTO
+                {
+                    Exercises = clientRoutine.Routine.RoutineExercises.Select(_ => _.Exercise.Name).ToList(),
+                    RoutineDate = clientRoutine.RoutineDate
+                };
+            }
 
-            
             return new ClientProfileDTO
             {
                 FullName = client.FullName,
@@ -56,24 +64,30 @@ namespace GYMApp.Services.Services
                 BirthDate = client.BirthDate,
                 Trainer = client.Trainer.FullName,
                 TrainerID = client.TrainerID,
-                ClientRoutineDTO = new ClientRoutineDTO
-                {
-                    Exercises = clientRoutine.Routine.RoutineExercises.Select(_=>_.Exercise.Name).ToList(),                    
-                    RoutineDate = clientRoutine.RoutineDate
-                }
+                ClientRoutineDTO = clientRoutineDto
             };
         }
 
-        public List<Client> GetClientsByName(string Name)
+        public List<GetAllClientsDTO> GetClientsByName(string Name)
         {
-            List<Client> clients = context.Clients.Where(_ => _.FullName.Contains(Name)).ToList();
+            List<Client> clients = context.Clients
+                .Include(_ => _.Trainer).Include(_ => _.Measurement)
+                .Where(_=>_.FullName.Contains(Name)).ToList();
+           
+            List<GetAllClientsDTO> clientDTOs = new List<GetAllClientsDTO>();
 
-            if (clients.Count == 0)
-            {
-                throw new Exception("Клиенты с таким именем не найдёны"); // Не уверен что это правильно
-            }
+            clientDTOs = clients.Select(
+                _ => new GetAllClientsDTO
+                {
+                    FullName = _.FullName,
+                    Trainer = _.Trainer.FullName,
+                    LastMeasurementDate = _.Measurement.OrderByDescending(_ => _.DateOfCreation).FirstOrDefault()?.DateOfCreation.ToString("dd.MM.yyyy"),
+                    PhoneNumber = _.PhoneNumber,
+                    Email = _.Email,
+                    Id = _.ID
+                }).ToList();
 
-            return clients;
+            return clientDTOs;
         }
 
 
@@ -89,23 +103,26 @@ namespace GYMApp.Services.Services
             context.SaveChanges();
         }
 
-        public List<GetAllClientsDTO> GetAllClientsDTO()
+        public List<GetAllClientsDTO> GetAllClientsDTO(string name)
         {
-            List<Client> clients = context.Clients.Include(_ => _.Trainer).Include(_ => _.Measurement).ToList();
+            var query = context.Clients
+                .Include(_ => _.Trainer).Include(_ => _.Measurement).AsQueryable();
 
-            List<GetAllClientsDTO> clientDTOs = new List<GetAllClientsDTO>();
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(_ => _.FullName.Contains(name));
+            }
 
-            clientDTOs = clients.Select(
+            return query.Select(
                 _ => new GetAllClientsDTO
                 {
                     FullName = _.FullName,
                     Trainer = _.Trainer.FullName,
-                    LastMeasurementDate = _.Measurement.OrderByDescending(_ => _.DateOfCreation).FirstOrDefault()?.DateOfCreation.ToString("dd.MM.yyyy"),
+                    LastMeasurementDate = _.Measurement.Any() ? _.Measurement.OrderByDescending(_ => _.DateOfCreation).FirstOrDefault().DateOfCreation.ToString("dd.MM.yyyy") : "",
                     PhoneNumber = _.PhoneNumber,
-                    Email = _.Email
-                }).ToList();
-
-            return clientDTOs;
+                    Email = _.Email,
+                    Id = _.ID
+                }).ToList();        
         }
 
         public void DeleteClient(int ClientID)

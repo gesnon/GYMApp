@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace GYMApp.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("API/Measurement")]
     public class MeasurementController
     {
         private readonly IMeasurementService measurementService;
@@ -46,7 +46,7 @@ namespace GYMApp.Controllers
             return measurementService.GetAllClientsMeasurements(ClientID);
         }
 
-        [HttpGet("{ClientID}")]
+        [HttpGet("GetLastClientMeasurement/{ClientID}")]
         public MeasurementDTO GetLastClientMeasurement(int ClientID)
         {
             return measurementService.GetLastClientMeasurement(ClientID);

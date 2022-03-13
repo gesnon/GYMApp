@@ -86,7 +86,7 @@ namespace GYMApp.Services.Services
                 Weight = _.Weight,
                 Height = _.Height,
                 ClientID = _.ClientID,
-                DateOFCreation = _.DateOfCreation
+                DateOfCreation = _.DateOfCreation
             }).ToList();
 
             return measurementDTOs;
@@ -111,7 +111,7 @@ namespace GYMApp.Services.Services
                 Weight = measurement.Weight,
                 Height = measurement.Height,
                 ClientID = measurement.ClientID,
-                DateOFCreation = measurement.DateOfCreation
+                DateOfCreation = measurement.DateOfCreation
             };
             return measurementDTO;                             //Выглядит стремно, 100% можно сделать проще
         }

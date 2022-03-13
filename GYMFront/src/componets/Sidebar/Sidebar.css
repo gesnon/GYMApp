@@ -1,12 +1,11 @@
 .w3-sidebar{
-    height: 50%;    
-    background-color:#fff;
-    overflow:auto;
-    width: 15%; 
-    margin-left: 3%;
-    font-weight: 500;
-    margin-top: 5%;  
-    background: #855656;  
+  background-color: #ffffff;
+  height: 100%;
+  width: 20%;
+  border-radius: 1rem;
+  margin-right: 15px;
+  float: left;
+  border: 1px solid black;
   }
   
 .w3-bar-block .w3-bar-item {
@@ -17,13 +16,11 @@
     white-space: normal;
     float: none;
     outline: 0;
+    border: 1px solid black; 
+    border-radius: 1.0rem;  
+    margin: 3%;  
+    color: #000;
   }
-
-.w3-light-grey,.w3-hover-light-grey:hover,.w3-light-gray,.w3-hover-light-gray:hover{
-      color:#000!important;
-      
-    }
-
     .w3-button {
         border: none;
         display: inline-block;

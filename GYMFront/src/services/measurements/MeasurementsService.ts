@@ -1,12 +1,14 @@
 import axios from 'axios';
-import { Client } from '../../models/Client';
+import { Measurement } from '../../models/Measurement';
 
-class ClientsService {
-    async getAllClients(): Promise<Client[]> {
-        const response = await axios.get('https://localhost:44361/API/Client');
-        
-        return response.data as Client[];
+class MeasurementService {
+    async getAllClientsMeasurements(id: number): Promise<Measurement[]> {
+        const response = await axios.get(`https://localhost:44361/API/Measurement/${id}`);
+
+        return response.data as Measurement[];
     }
+
+
 }
 
-export default ClientsService;
+export default MeasurementService;

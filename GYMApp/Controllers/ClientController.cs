@@ -32,12 +32,6 @@ namespace GYMApp.Controllers
             return clientService.GetClient(ClientID);
         }
 
-        [HttpGet("GetClientsByName/{Name}")]
-        public List<Client> GetClientsByName(string Name)
-        {
-            return clientService.GetClientsByName(Name);
-        }
-
         [HttpPost]
         public void CreateClient([FromBody] ClientCreateDTO newClientDTO)
         {
@@ -50,10 +44,10 @@ namespace GYMApp.Controllers
             clientService.DeleteClient(ClientID);
         }
 
-        [HttpGet]
-        public List<GetAllClientsDTO> GetAllClientsDTO()
+        [HttpGet("GetClientsByName/{Name?}")]
+        public List<GetAllClientsDTO> GetAllClientsDTO(string Name)
         {
-           return  clientService.GetAllClientsDTO();
+           return  clientService.GetAllClientsDTO(Name);
         }
     }
 }

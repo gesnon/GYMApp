@@ -11,8 +11,7 @@ namespace GYMApp.Services.Services
         public void CreateClient(ClientCreateDTO newClientDTO);
         public void UpdateClient(int ID, ClientUpdateDTO newClientUpdateDTO);
         public ClientProfileDTO GetClient(int ClientID);
-        public List<Client> GetClientsByName(string Name); // ищет contains, а не ==
-        public List<GetAllClientsDTO> GetAllClientsDTO();
+        public List<GetAllClientsDTO> GetAllClientsDTO(string Name);
         public void DeleteClient(int ClientID);
     }
 }
