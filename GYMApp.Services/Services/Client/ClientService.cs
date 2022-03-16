@@ -42,19 +42,9 @@ namespace GYMApp.Services.Services
                 throw new Exception("Клиент не найдён");
             }
 
-            Client client = context.Clients.Include(_ => _.Trainer).Include(_ => _.ClientRoutines).ThenInclude(_ => _.Routine).ThenInclude(_ => _.RoutineExercises).ThenInclude(_ => _.Exercise).FirstOrDefault(_ => _.ID == ClientID);
+            Client client = context.Clients.Include(_ => _.Trainer).FirstOrDefault(_ => _.ID == ClientID);
 
-            ClientRoutine clientRoutine = client.ClientRoutines.OrderByDescending(_ => _.RoutineDate).FirstOrDefault();
 
-            ClientRoutineDTO clientRoutineDto = null;
-            if (clientRoutine != null)
-            {
-                clientRoutineDto = new ClientRoutineDTO
-                {
-                    Exercises = clientRoutine.Routine.RoutineExercises.Select(_ => _.Exercise.Name).ToList(),
-                    RoutineDate = clientRoutine.RoutineDate
-                };
-            }
 
             return new ClientProfileDTO
             {
@@ -64,20 +54,20 @@ namespace GYMApp.Services.Services
                 BirthDate = client.BirthDate,
                 Trainer = client.Trainer.FullName,
                 TrainerID = client.TrainerID,
-                ClientRoutineDTO = clientRoutineDto
+
             };
         }
 
-        public List<GetAllClientsDTO> GetClientsByName(string Name)
+        public List<GetTrainerDTO> GetClientsByName(string Name)
         {
             List<Client> clients = context.Clients
                 .Include(_ => _.Trainer).Include(_ => _.Measurement)
                 .Where(_=>_.FullName.Contains(Name)).ToList();
            
-            List<GetAllClientsDTO> clientDTOs = new List<GetAllClientsDTO>();
+            List<GetTrainerDTO> clientDTOs = new List<GetTrainerDTO>();
 
             clientDTOs = clients.Select(
-                _ => new GetAllClientsDTO
+                _ => new GetTrainerDTO
                 {
                     FullName = _.FullName,
                     Trainer = _.Trainer.FullName,
@@ -103,7 +93,7 @@ namespace GYMApp.Services.Services
             context.SaveChanges();
         }
 
-        public List<GetAllClientsDTO> GetAllClientsDTO(string name)
+        public List<GetTrainerDTO> GetAllClientsDTO(string name)
         {
             var query = context.Clients
                 .Include(_ => _.Trainer).Include(_ => _.Measurement).AsQueryable();
@@ -114,7 +104,7 @@ namespace GYMApp.Services.Services
             }
 
             return query.Select(
-                _ => new GetAllClientsDTO
+                _ => new GetTrainerDTO
                 {
                     FullName = _.FullName,
                     Trainer = _.Trainer.FullName,

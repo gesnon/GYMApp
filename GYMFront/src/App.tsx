@@ -8,6 +8,7 @@ import Reviews from './componets/Reviews/Reviews';
 import ClientProfile from './componets/ClientProfile/ClientProfile';
 import MeasurementList from './componets/MeasurementList/MeasurementList';
 import Registration from './componets/Registration/Registration';
+import TrainersList from './componets/TrainersList/TrainersList';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path='/' element={<ClientsList />} />
             <Route path='/clients' element={<ClientsList />} />
+            <Route path='/trainers' element={<TrainersList />} />
             <Route path='/clients/:id' element={<ClientProfile />} />
             <Route path='/myreviews' element={<Reviews />} />
             <Route path='/measurement/:id' element={<MeasurementList />} />

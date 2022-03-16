@@ -9,7 +9,7 @@ namespace GYMDB.Models
         public Trainer Trainer { get; set; }
         public int? TrainerID { get; set; }
         public List<Measurement> Measurement { get; set; }
-        public List<ClientRoutine> ClientRoutines { get; set; }         
+        public List<Routine> Routines { get; set; }         
 
     }
 }

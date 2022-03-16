@@ -45,7 +45,7 @@ namespace GYMApp.Controllers
         }
 
         [HttpGet("GetClientsByName/{Name?}")]
-        public List<GetAllClientsDTO> GetAllClientsDTO(string Name)
+        public List<GetTrainerDTO> GetAllClientsDTO(string Name)
         {
            return  clientService.GetAllClientsDTO(Name);
         }

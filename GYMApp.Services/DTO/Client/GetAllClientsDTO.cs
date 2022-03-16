@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GYMApp.Services.DTO
 {
-    public class GetAllClientsDTO
+    public class GetTrainerDTO
     {   
         public string FullName { get; set; }
         public string Trainer { get; set; }

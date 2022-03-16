@@ -45,7 +45,8 @@ namespace GYMApp
             services.AddTransient<IExerciseService, ExerciseService>();
             services.AddTransient<IRoutineService, RoutineService>();
             services.AddTransient<IRoutineExerciseService, RoutineExerciseService>();
-            services.AddTransient<IClientRoutineService, ClientRoutineService>();
+            services.AddTransient<ITrainingDayService, TrainingDayService>();
+            services.AddTransient<ITrainingWeekService, TrainingWeekService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

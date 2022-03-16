@@ -1,15 +1,31 @@
 import './NavigationBar.css';
 import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
 import ClientInfo from '../ClientInfo/ClientInfo';
-function NavigationBar() {
-    const { id } = useParams();
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css'; 
+import { ClientProfile as ClientProfileModel } from "../../models/ClientProfile";
+import MeasurementList from '../MeasurementList/MeasurementList';
+
+type INavigationBarProps = {
+    client: ClientProfileModel;
+}
+function NavigationBar(props: INavigationBarProps) {
+    const { client } = props;
 
     return (
-        <ul className="navigationBar">
-            <a className={"button"} href={`/clients/About/${id}`}> About </a>
-            <a className={"button"} href={`/clients/Measurement/${id}`}>Measurement </a>
-            <a className={"button"} href="3">Routine </a>
-        </ul>
+        <Tabs forceRenderTabPanel>
+        <TabList>
+          <Tab>About</Tab>
+          <Tab>Measurements</Tab>
+          <Tab>Routine</Tab>
+        </TabList>
+        <TabPanel>
+            <ClientInfo client={client} />     
+        </TabPanel>
+        <TabPanel>
+            <MeasurementList></MeasurementList>
+        </TabPanel>
+      </Tabs>
     )
 }
 

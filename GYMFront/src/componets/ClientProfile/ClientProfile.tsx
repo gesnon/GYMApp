@@ -5,6 +5,7 @@ import ClientsService from "../../services/clients/ClientsService";
 import Avatar from "../Avatar/Avatar";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import ClientInfo from "../ClientInfo/ClientInfo";
+import TrainingWeek from "../TrainingWeek/TrainingWeek";
 import './ClientProfile.css';
 
 import { BrowserRouter, Route, Routes, useMatch } from 'react-router-dom';
@@ -24,16 +25,10 @@ function ClientProfile() {
     return (
         <div className="clientProfileContainer">
             <Avatar name={client.fullName} photoSrc={base64} />
-            <NavigationBar></NavigationBar>
-            <Link to={`/clients/About/${id}`}>Test</Link>
-            <div className="conteinerInfo">
-                <Routes>
-                    <Route path='/clients/About/:id' element={<ClientInfo client={client} />} />
-                    <Route path='Measurement/:id' element={<MeasurementList />} />
-                    <Route path='Routine/:id' element={<ClientInfo client={client} />} />
-                </Routes>
-           
-            </div>
+            
+            <NavigationBar client={client}></NavigationBar>  
+            <div className="conteinerInfo"></div>      
+
         </div>
     );
 }

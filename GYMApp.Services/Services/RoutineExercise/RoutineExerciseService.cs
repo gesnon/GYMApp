@@ -22,7 +22,7 @@ namespace GYMApp.Services.Services
             context.RoutineExercises.Add(new RoutineExercise
             {
             ExerciseID = newRoutineExerciseDTO.ExerciseID,
-            RoutineID = newRoutineExerciseDTO.RoutineID,
+            TrainingDayID = newRoutineExerciseDTO.TrainingDayID,
             Exercise = context.Exercises
                 .FirstOrDefault(_ => _.ID == newRoutineExerciseDTO.ExerciseID)
         });

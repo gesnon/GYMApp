@@ -52,30 +52,6 @@ namespace GYMDB.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("GYMDB.Models.ClientRoutine", b =>
-                {
-                    b.Property<int>("ClientRoutineID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientRoutineID"), 1L, 1);
-
-                    b.Property<int>("ClientID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RoutineDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RoutineID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ClientRoutineID");
-
-                    b.HasIndex("ClientID");
-
-                    b.ToTable("ClientRoutines");
-                });
-
             modelBuilder.Entity("GYMDB.Models.Exercise", b =>
                 {
                     b.Property<int>("ID")
@@ -174,6 +150,12 @@ namespace GYMDB.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
+                    b.Property<int>("ClientID")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Current")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -181,6 +163,8 @@ namespace GYMDB.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ClientID");
 
                     b.ToTable("Routines");
                 });
@@ -193,22 +177,17 @@ namespace GYMDB.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoutineExerciseID"), 1L, 1);
 
-                    b.Property<int?>("ClientRoutineID")
-                        .HasColumnType("int");
-
                     b.Property<int>("ExerciseID")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoutineID")
+                    b.Property<int>("TrainingDayID")
                         .HasColumnType("int");
 
                     b.HasKey("RoutineExerciseID");
 
-                    b.HasIndex("ClientRoutineID");
-
                     b.HasIndex("ExerciseID");
 
-                    b.HasIndex("RoutineID");
+                    b.HasIndex("TrainingDayID");
 
                     b.ToTable("RoutineExercises");
                 });
@@ -241,6 +220,48 @@ namespace GYMDB.Migrations
                     b.ToTable("Trainers");
                 });
 
+            modelBuilder.Entity("GYMDB.Models.TrainingDay", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TrainingWeekID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("TrainingWeekID");
+
+                    b.ToTable("TrainingDays");
+                });
+
+            modelBuilder.Entity("GYMDB.Models.TrainingWeek", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoutineID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("RoutineID");
+
+                    b.ToTable("TrainingWeeks");
+                });
+
             modelBuilder.Entity("GYMDB.Models.Client", b =>
                 {
                     b.HasOne("GYMDB.Models.Trainer", "Trainer")
@@ -248,15 +269,6 @@ namespace GYMDB.Migrations
                         .HasForeignKey("TrainerID");
 
                     b.Navigation("Trainer");
-                });
-
-            modelBuilder.Entity("GYMDB.Models.ClientRoutine", b =>
-                {
-                    b.HasOne("GYMDB.Models.Client", null)
-                        .WithMany("ClientRoutines")
-                        .HasForeignKey("ClientID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("GYMDB.Models.Measurement", b =>
@@ -287,47 +299,75 @@ namespace GYMDB.Migrations
                     b.Navigation("Trainer");
                 });
 
+            modelBuilder.Entity("GYMDB.Models.Routine", b =>
+                {
+                    b.HasOne("GYMDB.Models.Client", null)
+                        .WithMany("Routines")
+                        .HasForeignKey("ClientID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("GYMDB.Models.RoutineExercise", b =>
                 {
-                    b.HasOne("GYMDB.Models.ClientRoutine", null)
-                        .WithMany("Exercises")
-                        .HasForeignKey("ClientRoutineID");
-
                     b.HasOne("GYMDB.Models.Exercise", "Exercise")
                         .WithMany()
                         .HasForeignKey("ExerciseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GYMDB.Models.Routine", null)
-                        .WithMany("RoutineExercises")
-                        .HasForeignKey("RoutineID")
+                    b.HasOne("GYMDB.Models.TrainingDay", null)
+                        .WithMany("Exercises")
+                        .HasForeignKey("TrainingDayID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Exercise");
                 });
 
-            modelBuilder.Entity("GYMDB.Models.Client", b =>
+            modelBuilder.Entity("GYMDB.Models.TrainingDay", b =>
                 {
-                    b.Navigation("ClientRoutines");
-
-                    b.Navigation("Measurement");
+                    b.HasOne("GYMDB.Models.TrainingWeek", null)
+                        .WithMany("TrainingDays")
+                        .HasForeignKey("TrainingWeekID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("GYMDB.Models.ClientRoutine", b =>
+            modelBuilder.Entity("GYMDB.Models.TrainingWeek", b =>
                 {
-                    b.Navigation("Exercises");
+                    b.HasOne("GYMDB.Models.Routine", null)
+                        .WithMany("TrainingW")
+                        .HasForeignKey("RoutineID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GYMDB.Models.Client", b =>
+                {
+                    b.Navigation("Measurement");
+
+                    b.Navigation("Routines");
                 });
 
             modelBuilder.Entity("GYMDB.Models.Routine", b =>
                 {
-                    b.Navigation("RoutineExercises");
+                    b.Navigation("TrainingW");
                 });
 
             modelBuilder.Entity("GYMDB.Models.Trainer", b =>
                 {
                     b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("GYMDB.Models.TrainingDay", b =>
+                {
+                    b.Navigation("Exercises");
+                });
+
+            modelBuilder.Entity("GYMDB.Models.TrainingWeek", b =>
+                {
+                    b.Navigation("TrainingDays");
                 });
 #pragma warning restore 612, 618
         }

@@ -25,14 +25,13 @@ namespace GYMApp.Services.Services
             {
                 Name = newRoutineDTO.Name,
                 Description = newRoutineDTO.Description,
-                RoutineExercises = newRoutineDTO.Exercises
-                .Select(_ => new RoutineExercise { ExerciseID = _ }).ToList()
+                ClientID = newRoutineDTO.ClientID,
             });
             context.SaveChanges();
         }
         public void UpdateRoutine(int RoutineID, RoutineUpdateDTO newRoutineDTO)
         {
-            Routine OldRoutine = context.Routines.Include(_ => _.RoutineExercises).FirstOrDefault(_ => _.ID == RoutineID);
+            Routine OldRoutine = context.Routines.FirstOrDefault(_ => _.ID == RoutineID);
 
             if (OldRoutine == null)
             {
@@ -42,14 +41,6 @@ namespace GYMApp.Services.Services
             OldRoutine.Name = newRoutineDTO.Name;
             OldRoutine.Description = newRoutineDTO.Description;
 
-            foreach (RoutineExercise routineExercise in OldRoutine.RoutineExercises)
-            {                
-                    context.RoutineExercises.Remove(routineExercise);                              
-            }
-            OldRoutine.RoutineExercises = newRoutineDTO.Exercises
-
-                .Select(_ => new RoutineExercise { ExerciseID = _ }).ToList();
-
             context.SaveChanges();
         }
 
@@ -57,7 +48,7 @@ namespace GYMApp.Services.Services
         {
             if (context.Routines.FirstOrDefault(_ => _.ID == RoutineID) == null)
             {
-                throw new Exception("Упражнение не найдёно");
+                throw new Exception("Программа не найдена");
             }
 
             context.Routines.Remove(context.Routines.FirstOrDefault(_ => _.ID == RoutineID));
@@ -65,5 +56,38 @@ namespace GYMApp.Services.Services
             context.SaveChanges();
         }
 
+        public GetRoutineDTO GetCurrentRoutine(int ClientID)
+        {
+            Client client = context.Clients.Include(_=>_.Routines)
+                .ThenInclude(_ => _.TrainingW).ThenInclude(_ => _.TrainingDays)
+                .ThenInclude(_ => _.Exercises).ThenInclude(_=>_.Exercise)
+                .FirstOrDefault(_ => _.ID == ClientID);
+
+            Routine routine = client.Routines.Where(_ => _.Current == true).ToList().FirstOrDefault();
+            
+            return new GetRoutineDTO
+
+            {
+                Name = routine?.Name,
+                Description = routine?.Description,
+                TrainingWeeksDTO = routine?.TrainingW.Select(_ => new TrainingWeekDTO
+                {
+                    Name = _.Name,
+                    ID = _.ID,
+                    TrainingDaysDTO = _.TrainingDays.Select(_ => new TrainingDayDTO
+                    {
+                        Name = _.Name,
+                        ID = _.ID,
+                        Exercises = _.Exercises.Select(_ => new ExerciseGetDTO
+                        {
+                            Name = _.Exercise.Name,
+                            Description = _.Exercise.Description,
+                            ExerciseID = _.Exercise.ID
+
+                        }).ToList()
+                    }).ToList()
+                }).ToList()
+            };
+        }
     }
 }

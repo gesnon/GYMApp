@@ -86,7 +86,24 @@ namespace GYMApp.Services.Services
 
             context.SaveChanges();
         }
+        public List<GetTrainersDTO> GetAllTrainersDTO(string name)
+        {
+            var query = context.Trainers.AsQueryable();
+            int num = context.Clients.Where(_ => _.TrainerID == _.ID).Count();
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(_ => _.FullName.Contains(name));
+            }
 
+            return query.Select(
+                _ => new GetTrainersDTO
+                {
+                    FullName = _.FullName,                    
+                    Id = _.ID,                    
+                    BirthDate = _.BirthDate,
+                    NumberOfClients=num
+                }).ToList();
+        }
 
     }
 }

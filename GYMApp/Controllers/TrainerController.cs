@@ -48,5 +48,11 @@ namespace GYMApp.Controllers
             return trainerService.GetTrainersDTO();
         }
 
+        [HttpGet("GetTrainersByName/{Name?}")]
+        public List<GetTrainersDTO> GetAllTrainersDTO(string name)
+        {
+            return trainerService.GetAllTrainersDTO(name);
+        }
+
     }
 }

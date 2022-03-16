@@ -7,6 +7,6 @@ namespace GYMApp.Services.DTO
     public class RoutineExerciseCreateDTO
     {
         public int ExerciseID { get; set; }
-        public int RoutineID { get; set; }
+        public int TrainingDayID { get; set; }
     }
 }

@@ -11,6 +11,8 @@ namespace GYMDB.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<RoutineExercise> RoutineExercises { get; set; }
+        public List<TrainingWeek> TrainingW { get; set; }        
+        public int ClientID { get; set; }
+        public bool Current { get; set; }
     }
 }

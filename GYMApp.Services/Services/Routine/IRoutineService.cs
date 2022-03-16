@@ -10,7 +10,8 @@ namespace GYMApp.Services.Services
     {
         public void CreateRoutine(RoutineCreateDTO newRoutineDTO);
         public void UpdateRoutine(int RoutineID, RoutineUpdateDTO newRoutineDTO);
-        public void DeleteRoutine(int RoutineID);        
+        public void DeleteRoutine(int RoutineID);
+        public GetRoutineDTO GetCurrentRoutine(int ClientID);
 
     }
 }

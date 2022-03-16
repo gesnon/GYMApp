@@ -17,6 +17,7 @@ namespace GYMApp.Services.Services
         public void DeleteTrainer(int TrainerID);
 
         public List<TrainerProfileDTO> GetTrainersDTO();
+        public List<GetTrainersDTO> GetAllTrainersDTO(string name);
 
     }
 }

@@ -14,7 +14,8 @@ namespace GYMDB
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Routine> Routines { get; set; }
         public DbSet<RoutineExercise> RoutineExercises { get; set; }
-        public DbSet<ClientRoutine> ClientRoutines { get; set; }
+        public DbSet<TrainingDay> TrainingDays { get; set; }
+        public DbSet<TrainingWeek> TrainingWeeks { get; set; }
         public ContextDB(DbContextOptions options) : base(options)
         {
             Database.EnsureCreated();                      // если базы нет, то она создастся

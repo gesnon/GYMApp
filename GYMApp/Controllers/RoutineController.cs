@@ -37,6 +37,12 @@ namespace GYMApp.Controllers
         {
             routineService.DeleteRoutine(RoutineID);
         }
-        
+
+        [HttpGet("{ClientID}")]
+        public GetRoutineDTO GetCurrentRoutine(int ClientID)
+        {
+           return routineService.GetCurrentRoutine(ClientID);
+        }
+
     }
 }

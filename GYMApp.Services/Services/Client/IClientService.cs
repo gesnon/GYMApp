@@ -11,7 +11,7 @@ namespace GYMApp.Services.Services
         public void CreateClient(ClientCreateDTO newClientDTO);
         public void UpdateClient(int ID, ClientUpdateDTO newClientUpdateDTO);
         public ClientProfileDTO GetClient(int ClientID);
-        public List<GetAllClientsDTO> GetAllClientsDTO(string Name);
+        public List<GetTrainerDTO> GetAllClientsDTO(string Name);
         public void DeleteClient(int ClientID);
     }
 }
