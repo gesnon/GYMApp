@@ -54,22 +54,17 @@ namespace GYMApp.Services.Services
 
             context.SaveChanges();
         }
-        public List<Exercise> GetExerciseByName(string Name)
-        {
-            List<Exercise> list = context.Exercises.Where(x => x.Name.Contains(Name)).ToList();
 
-            if (list == null)
+        public List<ExerciseGetDTO> GetExercisesByName(string name)
+        {
+            var query = context.Exercises.AsQueryable();
+            
+            if (!string.IsNullOrEmpty(name))
             {
-                throw new Exception("Упражнения не найдены");
+                query = query.Where(_ => _.Name.Contains(name));
             }
 
-            return list;
-        }
-
-        public List<ExerciseGetDTO> GetAllExerciseDTO()
-        {
-
-            List<ExerciseGetDTO> list = context.Exercises.Select(_ => new ExerciseGetDTO
+            List<ExerciseGetDTO> list = query.Select(_ => new ExerciseGetDTO
             {
                 Name = _.Name,
                 Description = _.Description,
@@ -79,6 +74,16 @@ namespace GYMApp.Services.Services
             return list;
 
 
+        }
+        public ExerciseGetDTO GetExercise(int ExerciseID)
+        {
+            Exercise exercise = context.Exercises.FirstOrDefault(_ => _.ID == ExerciseID);
+            if (exercise == null)
+            {
+                throw new Exception("Упражнение не найдено");
+            }
+
+            return new ExerciseGetDTO { Name=exercise.Name, Description=exercise.Description };
         }
     }
 }

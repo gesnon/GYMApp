@@ -60,7 +60,7 @@ namespace GYMApp
             }
 
             app.UseHttpsRedirection();
-            app.UseCors(c => c.AllowAnyOrigin());
+            app.UseCors(c => c.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
 
             app.UseAuthorization();

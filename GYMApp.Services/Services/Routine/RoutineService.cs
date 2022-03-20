@@ -60,7 +60,7 @@ namespace GYMApp.Services.Services
         {
             Client client = context.Clients.Include(_=>_.Routines)
                 .ThenInclude(_ => _.TrainingW).ThenInclude(_ => _.TrainingDays)
-                .ThenInclude(_ => _.Exercises).ThenInclude(_=>_.Exercise)
+                .ThenInclude(_ => _.RoutineExercises).ThenInclude(_=>_.Exercise)
                 .FirstOrDefault(_ => _.ID == ClientID);
 
             Routine routine = client.Routines.Where(_ => _.Current == true).ToList().FirstOrDefault();
@@ -78,7 +78,7 @@ namespace GYMApp.Services.Services
                     {
                         Name = _.Name,
                         ID = _.ID,
-                        Exercises = _.Exercises.Select(_ => new ExerciseGetDTO
+                        Exercises = _.RoutineExercises.Select(_ => new ExerciseGetDTO
                         {
                             Name = _.Exercise.Name,
                             Description = _.Exercise.Description,

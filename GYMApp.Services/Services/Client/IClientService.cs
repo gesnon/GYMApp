@@ -9,7 +9,7 @@ namespace GYMApp.Services.Services
     public interface IClientService
     {        
         public void CreateClient(ClientCreateDTO newClientDTO);
-        public void UpdateClient(int ID, ClientUpdateDTO newClientUpdateDTO);
+        public void UpdateClient(ClientUpdateDTO newClientUpdateDTO);
         public ClientProfileDTO GetClient(int ClientID);
         public List<GetTrainerDTO> GetAllClientsDTO(string Name);
         public void DeleteClient(int ClientID);

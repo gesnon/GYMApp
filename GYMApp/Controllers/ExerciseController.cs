@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace GYMApp.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("API/Exercise")]
     public class ExerciseController
     {
         private readonly IExerciseService exerciseService;
@@ -33,22 +33,23 @@ namespace GYMApp.Controllers
             exerciseService.UpdateExercise(ExerciseID,newExerciseUpdateDTO);
         }
 
-        [HttpDelete("{MeasurementID}")]
+        [HttpDelete("{ExerciseID}")]
         public void DeleteExercise(int ExerciseID)
         {
             exerciseService.DeleteExercise(ExerciseID);
         }
 
-        [HttpGet("{Name}")]
-        public List<Exercise> GetExerciseByName(string Name)
+        [HttpGet("GetExercisesByName/{Name?}")]
+        public List<ExerciseGetDTO> GetExercisesByName(string Name)
         {          
-            return exerciseService.GetExerciseByName(Name);
+            return exerciseService.GetExercisesByName(Name);
         }
 
-        [HttpGet]
-        public List<ExerciseGetDTO> GetAllExerciseDTO()
+        [HttpGet("{ExerciseID}")]
+        public ExerciseGetDTO GetExercise(int ExerciseID)
         {
-            return exerciseService.GetAllExerciseDTO();
+            return exerciseService.GetExercise(ExerciseID);
         }
+
     }
 }

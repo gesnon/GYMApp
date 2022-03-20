@@ -12,18 +12,18 @@ namespace GYMApp.Controllers
     [ApiController]
     [Route("API/Client")]
     public class ClientController : ControllerBase
-    {        
+    {
         private readonly IClientService clientService;
 
         public ClientController(IClientService clientService)
-        {            
+        {
             this.clientService = clientService;
         }
 
-        [HttpPut("{ClientID}")]
-        public void UpdateClient(int ClientID, [FromBody] ClientUpdateDTO newClientDTO)
+        [HttpPut("UpdateClient")]
+        public void UpdateClient([FromBody] ClientUpdateDTO newClientDTO)
         {
-            clientService.UpdateClient(ClientID, newClientDTO);
+            clientService.UpdateClient(newClientDTO);
         }
 
         [HttpGet("{ClientID}")]

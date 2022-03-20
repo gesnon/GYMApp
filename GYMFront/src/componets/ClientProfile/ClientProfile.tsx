@@ -26,9 +26,8 @@ function ClientProfile() {
         <div className="clientProfileContainer">
             <Avatar name={client.fullName} photoSrc={base64} />
             
-            <NavigationBar client={client}></NavigationBar>  
-            <div className="conteinerInfo"></div>      
-
+            <NavigationBar client={client}></NavigationBar>              
+            
         </div>
     );
 }

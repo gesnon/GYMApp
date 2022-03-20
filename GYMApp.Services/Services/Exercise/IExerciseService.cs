@@ -10,9 +10,9 @@ namespace GYMApp.Services.Services
     {        
         public void CreateExercise(ExerciseCreateDTO newExerciseCreateDTO);
         public void UpdateExercise(int ID, ExerciseUpdateDTO newExerciseUpdateDTO);
-        public void DeleteExercise(int ExerciseID);
-        public List<Exercise> GetExerciseByName(string Name); 
-        public List<ExerciseGetDTO> GetAllExerciseDTO();
-        
+        public void DeleteExercise(int ExerciseID);      
+        public List<ExerciseGetDTO> GetExercisesByName(string Name);
+        public ExerciseGetDTO GetExercise(int ExerciseID);
+
     }
 }

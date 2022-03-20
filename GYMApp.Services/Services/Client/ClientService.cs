@@ -17,9 +17,9 @@ namespace GYMApp.Services.Services
             this.context = context;
         }
 
-        public void UpdateClient(int ClientID, ClientUpdateDTO newClientUpdateDTO)
+        public void UpdateClient(ClientUpdateDTO newClientUpdateDTO)
         {
-            Client OldClient = context.Clients.FirstOrDefault(_ => _.ID == ClientID);
+            Client OldClient = context.Clients.FirstOrDefault(_ => _.ID == newClientUpdateDTO.ClientID);
 
             if (OldClient == null)
             {
@@ -52,9 +52,9 @@ namespace GYMApp.Services.Services
                 PhoneNumber = client.PhoneNumber,
                 Email = client.Email,
                 BirthDate = client.BirthDate,
-                Trainer = client.Trainer.FullName,
+                Trainer = client.Trainer?.FullName,
                 TrainerID = client.TrainerID,
-
+                Id = client.ID
             };
         }
 

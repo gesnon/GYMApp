@@ -1,0 +1,27 @@
+.profileContainer {
+    background-color: #ffffff;    
+    width: 100%;
+    float: left;
+    border-radius: 1rem;
+    border: 1px solid rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0.8;
+}
+.clientInfoString {
+    flex: 0 0 50%;
+    max-width: 50%;
+    color: black;
+}
+.clientinfo {
+    width: 94%;
+    background: rgb(255, 255, 255);
+    margin: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+}
+.fieldValue {
+    color: #0062cc;
+}

@@ -8,7 +8,7 @@ function Sidebar() {
             <a href="/trainers" className="w3-bar-item w3-button">Trainers</a>
             <a href="/calendar" className="w3-bar-item w3-button">Calendar</a>
             <a href="/myreviews" className="w3-bar-item w3-button">My reviews</a>
-            
+            <a href="/exercises" className="w3-bar-item w3-button">Exercises</a>            
         </div>
     )
 }

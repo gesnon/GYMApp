@@ -13,5 +13,6 @@ namespace GYMApp.Services.DTO
         public string Email { get; set; }
         public DateTime BirthDate { get; set; }
         public int? TrainerID { get; set; }
+        public int Id { get; set; }
     }
 }

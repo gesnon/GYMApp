@@ -9,6 +9,11 @@ import ClientProfile from './componets/ClientProfile/ClientProfile';
 import MeasurementList from './componets/MeasurementList/MeasurementList';
 import Registration from './componets/Registration/Registration';
 import TrainersList from './componets/TrainersList/TrainersList';
+import GetExercise from './componets/Exercise/GetExercise';
+import ExerciseService from './services/Exercise/ExerciseService';
+import ExerciseList from './componets/ExerciseList/ExerciseList';
+import CreateExercise from './componets/CreateExercise/CreateExercise';
+import UpdateClient from './componets/UpdateClient/UpdateClient';
 
 function App() {
 
@@ -26,7 +31,12 @@ function App() {
             <Route path='/myreviews' element={<Reviews />} />
             <Route path='/measurement/:id' element={<MeasurementList />} />
             <Route path='/registration' element={<Registration />} />
+            <Route path='/exercises' element={<ExerciseList />} />
+            <Route path='/exercise' element={<CreateExercise />} />
+            <Route path='/exercise/:id' element={<GetExercise />} />
+            <Route path='/editClientInfo/:id' element={<UpdateClient />} />
           </Routes>
+          
         </div>
       </div>
     </body>

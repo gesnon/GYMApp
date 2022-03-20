@@ -1,25 +1,50 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { ClientProfile as ClientProfileModel } from "../../models/ClientProfile";
 import ClientsService from "../../services/clients/ClientsService";
-import './ClientInfo.css';
+import './UpdateClient.css';
+import { useForm } from "react-hook-form";
 
-type IClientInfoProps = {
-    client: ClientProfileModel;
-}
-function ClientInfo(props: IClientInfoProps) {
-    const { client } = props;
+function UpdateClient() {
+    const { id } = useParams();
+    const [client, setClient] = useState({} as ClientProfileModel);
+    const {
+        register,
+        handleSubmit,
+        watch,
+        reset,
+        formState: { errors }
+    } = useForm({
+        defaultValues: useMemo(() => {
+            console.log("defaultValues");
+            
+            return client;
+        }, [client])
+    });
+
+    useEffect(() => {
+        const clientsService = new ClientsService();
+        clientsService.getClient(Number.parseInt(id ?? "")).then(res => {
+            setClient(res);
+            reset(client);
+        });
+    }, []);
 
     return (
         <div className="profileContainer">
+
             <div className="clientinfo">
                 <div className="clientInfoString">
                     <span>Имя</span>
                 </div>
                 <div className="clientInfoString">
-                    <span className="fieldValue">{client.fullName ?? "test"}</span>
+                    <input
+                        {...register("fullName", { required: true })}/>
+                    {errors?.fullName?.type === "required" && <p>This field is required</p>}
                 </div>
             </div>
+
+
             <div className="clientinfo">
                 <div className="clientInfoString">
                     <span >Тренер</span>
@@ -52,10 +77,11 @@ function ClientInfo(props: IClientInfoProps) {
                     <span className="fieldValue">{client.birthDate ?? "test"}</span>
                 </div>
             </div>
-            <a href={`/editClientInfo/${props.client.id}`}> Edit information</a>
+            <a href="/editClientInfo"> Edit information</a>
+            <input type="submit" />
         </div>
 
     );
 }
 
-export default ClientInfo;
+export default UpdateClient;

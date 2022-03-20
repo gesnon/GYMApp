@@ -1,4 +1,4 @@
-import { ClientRoutine } from './ClientRoutine'
+import { Routine } from './Routine'
 
 export interface ClientProfile {
     fullName: string,
@@ -7,5 +7,6 @@ export interface ClientProfile {
     email: string,
     birthDate: string,
     trainerID: number,
-    clientRoutine: ClientRoutine
+    clientRoutine: Routine,
+    id: number
 };

@@ -10,6 +10,7 @@ namespace GYMApp.Services.DTO
         public DateTime BirthDate { get; set; }
         public string  PhoneNumber { get; set; }
         public string Email { get; set; }
-        public int? TrainerID { get; set; }        
+        public int? TrainerID { get; set; }
+        public int ClientID { get; set; }
     }
 }

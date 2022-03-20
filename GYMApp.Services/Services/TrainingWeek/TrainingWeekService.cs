@@ -16,12 +16,22 @@ namespace GYMApp.Services.Services
             this.context = context;
         }
 
-        public void AddNewTrainingWeek(TrainingWeekCreateDTO newTrainingWeekDTO)
+        public void AddNewTrainingWeek(TrainingWeekCreateDTO newTrainingWeekCreateDTO)
         {
             context.TrainingWeeks.Add(new TrainingWeek
             {
-                Name = newTrainingWeekDTO.Name,
-                RoutineID = newTrainingWeekDTO.RoutineID,
+                Name = newTrainingWeekCreateDTO.Name,
+                RoutineID = newTrainingWeekCreateDTO.RoutineID,
+                TrainingDays= newTrainingWeekCreateDTO.TrainingDaysCreateDTO.Select(_=> new TrainingDay 
+                { Name=_.Name,
+                  RoutineExercises=_.RoutineExercises.Select(_=> new RoutineExercise
+                  {
+                      ExerciseID=_.ExerciseID,
+                      TrainingDayID=_.TrainingDayID
+                  }).ToList(),
+                   TrainingWeekID=_.TrainingWeekID                   
+                }
+                ).ToList()
             });
             context.SaveChanges();
         }

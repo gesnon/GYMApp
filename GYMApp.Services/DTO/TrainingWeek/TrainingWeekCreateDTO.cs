@@ -9,5 +9,6 @@ namespace GYMApp.Services.DTO
     {
         public string Name { get; set; }                     
         public int RoutineID { get; set; }
+        public List<TrainingDayCreateDTO> TrainingDaysCreateDTO { get; set; }
     }
 }
