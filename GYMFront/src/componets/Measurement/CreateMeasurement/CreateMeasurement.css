@@ -1,4 +1,5 @@
-.createExercise{
+
+  .createMeasurement{
     background: #5fc6ce;  
     padding: 5%;
     margin-top: 5%;
@@ -7,18 +8,7 @@
     justify-content: center;
   }
 
-.container {
-    display:flex;    
-    color: black;
-    justify-content: center;
-}
-.descriptionContainer {
-    display:flex;    
-    color: black;
-    justify-content: center;
-}
-
-input {
+    input {
     display: block;
     box-sizing: border-box;
     width: 30%;
@@ -40,7 +30,12 @@ input {
     font-size: 14px;
     font-weight: 200;
   }
-  .buttonContainer {
+  .measurementContainer {
+    display:flex;    
+    color: black;
+    justify-content: center;
+}
+.buttonContainer {
     margin-top: 15px;
     display:flex;    
     color: black;
@@ -75,5 +70,5 @@ input[type="submit"]:active {
 }
 form {
     max-width: 500px;
-    margin: 0 auto;
+    margin: 0 auto;    
 }

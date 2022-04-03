@@ -7,6 +7,15 @@
   border-radius: 1.0rem;  
 }
 
+.excersisesTab{
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+.TrainingDay{
+  display: flex;
+}
+
 .tablink {
   background-color: #555;
   color: white;

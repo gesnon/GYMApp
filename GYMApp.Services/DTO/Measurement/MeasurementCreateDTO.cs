@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GYMApp.Services.DTO
 {
-    public class MeasurementDTO
+    public class MeasurementCreateDTO
     {
         public int LeftArm { get; set; }
 
@@ -19,11 +19,8 @@ namespace GYMApp.Services.DTO
         public int Weight { get; set; }
 
         public int Height { get; set; }
-        
-        public DateTime DateOfCreation { get; set; }
 
         public int ClientID { get; set; }
 
-        public int ID { get; set; }
     }
 }

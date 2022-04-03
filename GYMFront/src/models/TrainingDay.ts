@@ -1,7 +1,8 @@
 import { Exercise } from "./Exercise"
 
 export interface TrainingDay {
-    name: string,
+    description: string,
+    dayOfWeek: number,
     exercises: Exercise[],
     id:string
 };

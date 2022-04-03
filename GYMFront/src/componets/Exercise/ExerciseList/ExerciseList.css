@@ -27,6 +27,7 @@ form {
     outline: none;
     background: #F9F0DA;
     color: #9E9C9C;
+    width: 200px;
   }
   .d1 button {    
     top: 0;

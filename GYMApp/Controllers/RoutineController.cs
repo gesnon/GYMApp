@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace GYMApp.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("API/Routine")]
     public class RoutineController
     {
         private readonly IRoutineService routineService;
@@ -38,7 +38,7 @@ namespace GYMApp.Controllers
             routineService.DeleteRoutine(RoutineID);
         }
 
-        [HttpGet("{ClientID}")]
+        [HttpGet("GetCurrentRoutine/{ClientID}")]
         public GetRoutineDTO GetCurrentRoutine(int ClientID)
         {
            return routineService.GetCurrentRoutine(ClientID);

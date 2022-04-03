@@ -23,7 +23,7 @@ namespace GYMApp.Services.Services
                 Name = newTrainingWeekCreateDTO.Name,
                 RoutineID = newTrainingWeekCreateDTO.RoutineID,
                 TrainingDays= newTrainingWeekCreateDTO.TrainingDaysCreateDTO.Select(_=> new TrainingDay 
-                { Name=_.Name,
+                { Description=_.Name,
                   RoutineExercises=_.RoutineExercises.Select(_=> new RoutineExercise
                   {
                       ExerciseID=_.ExerciseID,

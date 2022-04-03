@@ -11,6 +11,8 @@ namespace GYMApp.Services.DTO
         public int ID { get; set; } 
         public  List<ExerciseGetDTO> Exercises { get; set; }
 
+        public int DayOfWeek { get; set; }
+
 
     }
 }

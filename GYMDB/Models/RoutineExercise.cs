@@ -9,6 +9,7 @@ namespace GYMDB.Models
     public class RoutineExercise
     {
         public int RoutineExerciseID { get; set; }
+        public string Set { get; set; }
         public int TrainingDayID { get; set; }
         public int ExerciseID { get; set; }            
         public Exercise Exercise { get; set; }

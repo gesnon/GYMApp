@@ -20,7 +20,7 @@ namespace GYMApp.Services.Services
         {
             context.TrainingDays.Add(new TrainingDay
             {
-                Name = newTrainingDayDTO.Name,
+                Description = newTrainingDayDTO.Name,
                 TrainingWeekID = newTrainingDayDTO.TrainingWeekID
             });
             context.SaveChanges();
@@ -35,7 +35,7 @@ namespace GYMApp.Services.Services
                 throw new Exception("Тренировочный день не найден");
             }
 
-            OldTrainingDay.Name = newTrainingDayDTO.Name;
+            OldTrainingDay.Description = newTrainingDayDTO.Name;
         }
 
         public void DeleteTrainingDay(int TrainingDayID)

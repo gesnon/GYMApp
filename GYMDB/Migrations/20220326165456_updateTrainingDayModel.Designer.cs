@@ -4,6 +4,7 @@ using GYMDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYMDB.Migrations
 {
     [DbContext(typeof(ContextDB))]
-    partial class ContextDBModelSnapshot : ModelSnapshot
+    [Migration("20220326165456_updateTrainingDayModel")]
+    partial class updateTrainingDayModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -179,9 +181,6 @@ namespace GYMDB.Migrations
 
                     b.Property<int>("ExerciseID")
                         .HasColumnType("int");
-
-                    b.Property<string>("Set")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TrainingDayID")
                         .HasColumnType("int");

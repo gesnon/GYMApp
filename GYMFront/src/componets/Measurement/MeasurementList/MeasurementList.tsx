@@ -1,9 +1,9 @@
 import { DetailsList, IColumn, IDetailsColumnRenderTooltipProps, IDetailsHeaderProps, IDetailsRowProps, SelectionMode } from "@fluentui/react/lib/DetailsList";
 import { useEffect, useState } from "react";
-import { Measurement } from '../../models/Measurement';
-import MeasurementService from '../../services/measurements/MeasurementsService';
+import { Measurement } from '../../../models/Measurement';
+import MeasurementService from '../../../services/measurements/MeasurementsService';
 import { useParams } from "react-router-dom";
-
+import './MeasurementList.css';
 function MeasurementList() {
     const [measurements, setMeasurements] = useState([] as Measurement[])
     const { id } = useParams();
@@ -25,8 +25,11 @@ function MeasurementList() {
     ];
 
     return (
-        <div className="name">
+        <div >
             <DetailsList columns={columns} items={measurements} />
+            <div className="buttonContainer">
+                <a href={`/measurement/${id}`}> Add New Measurement</a>
+            </div>
         </div>)
 }
 

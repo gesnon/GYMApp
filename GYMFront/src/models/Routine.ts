@@ -2,6 +2,6 @@ import { TrainingWeek } from "./TrainingWeek";
 
 export interface Routine {
     name: string,
-    trainingWeek: TrainingWeek[],
+    trainingWeeksDTO: TrainingWeek[],
     id:string 
 };

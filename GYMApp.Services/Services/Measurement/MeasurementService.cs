@@ -17,7 +17,7 @@ namespace GYMApp.Services.Services
             this.context = context;
         }
 
-        public void AddNewMeasurement(MeasurementDTO measurementDTO)
+        public void CreateMeasurement(MeasurementCreateDTO measurementDTO)
         {
             context.Measurements.Add(new Measurement
             {
@@ -29,7 +29,7 @@ namespace GYMApp.Services.Services
                 Weight = measurementDTO.Weight,
                 Height = measurementDTO.Height,
                 ClientID = measurementDTO.ClientID,
-
+                DateOfCreation=DateTime.Now
             });
             context.SaveChanges();
         }

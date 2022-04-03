@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ClientProfile as ClientProfileModel } from "../../models/ClientProfile";
 import ClientsService from "../../services/clients/ClientsService";
-import ClientInfo from "../ClientInfo/ClientInfo";
+import ClientInfo from "../Client/ClientInfo/ClientInfo";
 import "./Avatar.css";
 
 type IAvatarProps = {

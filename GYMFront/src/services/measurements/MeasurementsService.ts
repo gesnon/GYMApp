@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Measurement } from '../../models/Measurement';
+import { CreateMeasurement } from '../../models/CreateMeasurement';
 
 class MeasurementService {
     async getAllClientsMeasurements(id: number): Promise<Measurement[]> {
@@ -8,6 +9,10 @@ class MeasurementService {
         return response.data as Measurement[];
     }
 
+    async createMeasurement(measurement: CreateMeasurement): Promise<void> {
+        console.log(measurement);
+        const response = await axios.post(`https://localhost:44361/API/Measurement`, measurement);
+    }   
 
 }
 

@@ -31,16 +31,20 @@ function CreateExercise() {
     }
 
     return (
-        <form onSubmit={handleSubmit(saveExercise)}>
+        <form className="createExercise" onSubmit={handleSubmit(saveExercise)}>
+            <div className="container" >
             <label>Name</label>
             <input {...register("name", { required: true })} />
             {errors?.name?.type === "required" && <p>This field is required</p>}
-
-            <label>Description</label>
-            <input {...register("description", { required: true })} />
+            </div>
+            <div className="container" >
+            <label>Description</label>           
+            <textarea {...register("description", { required: true })} />       
             {errors?.description?.type === "required" && (<p>This field is required</p>)}
-
+            </div>
+            <div className="buttonContainer">
             <input type="submit" />
+            </div>
         </form>
     );
 }

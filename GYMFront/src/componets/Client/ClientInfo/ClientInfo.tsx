@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ClientProfile as ClientProfileModel } from "../../models/ClientProfile";
-import ClientsService from "../../services/clients/ClientsService";
+import { ClientProfile as ClientProfileModel } from "../../../models/ClientProfile";
+import ClientsService from "../../../services/clients/ClientsService";
 import './ClientInfo.css';
 
 type IClientInfoProps = {
@@ -52,7 +52,7 @@ function ClientInfo(props: IClientInfoProps) {
                     <span className="fieldValue">{client.birthDate ?? "test"}</span>
                 </div>
             </div>
-            <a href={`/editClientInfo/${props.client.id}`}> Edit information</a>
+            <a href={`/updateClientInfo/${props.client.id}`}> Update Information</a>
         </div>
 
     );

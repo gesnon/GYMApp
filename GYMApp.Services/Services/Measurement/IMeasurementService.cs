@@ -8,7 +8,7 @@ namespace GYMApp.Services.Services
 {
     public interface IMeasurementService
     {
-        public void AddNewMeasurement(MeasurementDTO measurementDTO);
+        public void CreateMeasurement(MeasurementCreateDTO measurementDTO);
 
         public void UpdateMeasurement(MeasurementUpdateDTO measurementUpdateDTO);
 

@@ -1,7 +1,7 @@
 import { DetailsList, IColumn, IDetailsColumnRenderTooltipProps, IDetailsHeaderProps, IDetailsRowProps, SelectionMode } from "@fluentui/react/lib/DetailsList";
 import { useEffect, useState } from "react";
-import { Client } from '../../models/Client';
-import ClientsService from '../../services/clients/ClientsService';
+import { Client } from '../../../models/Client';
+import ClientsService from '../../../services/clients/ClientsService';
 import './Clients.css';
 function ClientsList() {
     const [clients, setClients] = useState([] as Client[])

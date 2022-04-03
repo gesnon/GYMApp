@@ -21,9 +21,9 @@ namespace GYMApp.Controllers
         }
 
         [HttpPost]
-        public void AddNewMeasurement([FromBody] MeasurementDTO measurementDTO)
+        public void CreateMeasurement([FromBody] MeasurementCreateDTO measurementDTO)
         {
-            measurementService.AddNewMeasurement(measurementDTO);
+            measurementService.CreateMeasurement(measurementDTO);
 
         }
         [HttpPut]

@@ -1,8 +1,8 @@
 import { DetailsList, IColumn, IDetailsColumnRenderTooltipProps, IDetailsHeaderProps, IDetailsRowProps, SelectionMode } from "@fluentui/react/lib/DetailsList";
 import { useEffect, useState } from "react";
-import { Exercise } from "../../models/Exercise";
+import { Exercise } from "../../../models/Exercise";
 import './ExerciseList.css';
-import ExerciseService from "../../services/Exercise/ExerciseService";
+import ExerciseService from "../../../services/Exercise/ExerciseService";
 function ExerciseList() {
     const [exercises, setExercise] = useState([] as Exercise[])
     const [searchQuery, setSearchQuery] = useState("");

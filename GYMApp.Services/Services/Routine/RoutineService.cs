@@ -76,8 +76,9 @@ namespace GYMApp.Services.Services
                     ID = _.ID,
                     TrainingDaysDTO = _.TrainingDays.Select(_ => new TrainingDayDTO
                     {
-                        Name = _.Name,
+                        Name = _.Description,
                         ID = _.ID,
+                        DayOfWeek=(int)_.Day,
                         Exercises = _.RoutineExercises.Select(_ => new ExerciseGetDTO
                         {
                             Name = _.Exercise.Name,

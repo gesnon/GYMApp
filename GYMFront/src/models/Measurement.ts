@@ -1,12 +1,13 @@
 export interface Measurement {
-    id: string,
-    LeftArm: string,
-    RightArm: string,
-    LeftLeg: string,
-    RightLeg: string,
-    Chest: string,
-    Weight: string,
-    Height: string,
+    id: number,
+    clientId: number,
+    LeftArm: number,
+    RightArm: number,
+    LeftLeg: number,
+    RightLeg: number,
+    Chest: number,
+    Weight: number,
+    Height: number,
     DateOfCreation: string
 };       
 

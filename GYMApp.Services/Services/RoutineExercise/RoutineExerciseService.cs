@@ -21,11 +21,12 @@ namespace GYMApp.Services.Services
 
             context.RoutineExercises.Add(new RoutineExercise
             {
-            ExerciseID = newRoutineExerciseDTO.ExerciseID,
-            TrainingDayID = newRoutineExerciseDTO.TrainingDayID,
-            Exercise = context.Exercises
+                ExerciseID = newRoutineExerciseDTO.ExerciseID,
+                TrainingDayID = newRoutineExerciseDTO.TrainingDayID,
+                Set = newRoutineExerciseDTO.Set,
+                Exercise = context.Exercises
                 .FirstOrDefault(_ => _.ID == newRoutineExerciseDTO.ExerciseID)
-        });
+            });
             context.SaveChanges();
         }
 
@@ -42,5 +43,35 @@ namespace GYMApp.Services.Services
             context.SaveChanges();
         }
 
+        public void UpdateRoutineExercise(RoutineExerciseUpdateDTO newRoutineExerciseUpdateDTO)
+        {
+            RoutineExercise routineExercise = context.RoutineExercises.
+                FirstOrDefault(_ => _.RoutineExerciseID == newRoutineExerciseUpdateDTO.RoutineExerciseID);
+
+            if (routineExercise == null)
+            {
+                throw new Exception("RoutineExercise не найден");
+            }
+            routineExercise.Set = newRoutineExerciseUpdateDTO.Set;
+            routineExercise.ExerciseID = newRoutineExerciseUpdateDTO.ExerciseID;
+
+            context.SaveChanges();
+        }
+        public void AddRoutineExerciseToTrainingDay(int TrainingDayID, RoutineExerciseCreateDTO newRoutineExerciseCreateDTO)
+        {
+            TrainingDay trainingDay = context.TrainingDays.FirstOrDefault(_=>_.ID == TrainingDayID);
+            Exercise exercise = context.Exercises.FirstOrDefault(_ => _.ID == newRoutineExerciseCreateDTO.ExerciseID);
+
+            trainingDay.RoutineExercises.Add(new RoutineExercise
+            {
+                Exercise = exercise,
+                ExerciseID = newRoutineExerciseCreateDTO.ExerciseID,
+                TrainingDayID = newRoutineExerciseCreateDTO.TrainingDayID,
+                Set = newRoutineExerciseCreateDTO.Set
+            });
+
+            context.SaveChanges();
+        }
+        
     }
 }

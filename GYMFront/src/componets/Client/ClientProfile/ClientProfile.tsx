@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
-import { ClientProfile as ClientProfileModel } from "../../models/ClientProfile";
-import ClientsService from "../../services/clients/ClientsService";
-import Avatar from "../Avatar/Avatar";
-import NavigationBar from "../NavigationBar/NavigationBar";
+import { ClientProfile as ClientProfileModel } from "../../../models/ClientProfile";
+import ClientsService from "../../../services/clients/ClientsService";
+import Avatar from "../../Avatar/Avatar";
+import NavigationBar from "../../NavigationBar/NavigationBar";
 import ClientInfo from "../ClientInfo/ClientInfo";
-import TrainingWeek from "../TrainingWeek/TrainingWeek";
+import TrainingWeek from "../../TrainingWeek/GetTrainingWeek";
 import './ClientProfile.css';
 
 import { BrowserRouter, Route, Routes, useMatch } from 'react-router-dom';
-import MeasurementList from "../MeasurementList/MeasurementList";
+import MeasurementList from "../../Measurement/MeasurementList/MeasurementList";
 
 function ClientProfile() {
     const { id } = useParams();

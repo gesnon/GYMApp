@@ -29,8 +29,8 @@ namespace GYMApp.Services.Services
             OldClient.FullName = newClientUpdateDTO.FullName;
             OldClient.PhoneNumber = newClientUpdateDTO.PhoneNumber;
             OldClient.Email = newClientUpdateDTO.Email;
-            OldClient.BirthDate = newClientUpdateDTO.BirthDate;
-            OldClient.TrainerID = newClientUpdateDTO.TrainerID;
+            //OldClient.BirthDate = newClientUpdateDTO.BirthDate;
+            //OldClient.TrainerID = newClientUpdateDTO.TrainerID;
 
             context.SaveChanges();
         }
