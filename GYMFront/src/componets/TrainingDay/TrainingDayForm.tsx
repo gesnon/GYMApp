@@ -8,49 +8,38 @@ type IGetTrainingDayProps = {
 }
 
 function TrainingDayForm(props: IGetTrainingDayProps) {
-  const exercises = props.trainingDay.exercises;
-
-
-
+  const routineExercise = props.trainingDay.exercises;
+  console.log(props);
   return (
     <div className="AllContent">
 
 
       <Tabs forceRenderTabPanel>
         <div className="TrainingDay">
+        <div className="buttonsContainer">
         <TabList>
             <div className="excersisesTab">
-              {exercises.map(exercise => <Tab>{exercise.name}</Tab>)}
+              {routineExercise.map(routineExercise => <Tab>{routineExercise.name}</Tab>)}
             </div>
         </TabList>
-          <div >
-          {exercises.map(exercise => <TabPanel>{exercise.description}</TabPanel>)}
+        <div >            
+            <div className="buttonContainer">
+                <a href={`/rourineExercise`}> Add New Exercise</a>
+            </div>
+        </div>
+      </div>
+          <div >          
+          {routineExercise.map(routineExercise => <TabPanel>
+            <div className="tabPanel">
+              <p>{routineExercise.description}</p>
+              <p>{routineExercise.set}</p>
+            </div>
+            </TabPanel>)}
           </div>
         </div>
       </Tabs>
 
 
-
-
-      {/* <Tabs forceRenderTabPanel>
-        <TabList>
-          <Tab>Exersise 1</Tab>
-          <Tab>Exersise 2</Tab>
-          <Tab>Exersise 3</Tab>
-        </TabList>
-
-        <TabPanel>
-               <h1>test 1</h1>  
-        </TabPanel>
-
-        <TabPanel>
-        <h1>test 2</h1>  
-        </TabPanel>
-        <TabPanel>
-        <h1>test 3</h1>  
-            
-        </TabPanel>
-      </Tabs> */}
 
     </div>
 

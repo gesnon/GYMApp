@@ -79,11 +79,14 @@ namespace GYMApp.Services.Services
                         Name = _.Description,
                         ID = _.ID,
                         DayOfWeek=(int)_.Day,
-                        Exercises = _.RoutineExercises.Select(_ => new ExerciseGetDTO
+                        Exercises = _.RoutineExercises.Select(_ => new RoutineExerciseGetDTO
                         {
-                            Name = _.Exercise.Name,
-                            Description = _.Exercise.Description,
-                            ExerciseID = _.Exercise.ID
+                            
+                            Name= _.Exercise.Name,
+                            Description=_.Exercise.Description,
+                            ExerciseID= _.ExerciseID,
+                            Set=_.Set
+                            
 
                         }).ToList()
                     }).ToList()

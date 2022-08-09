@@ -9,8 +9,7 @@ namespace GYMApp.Services.DTO
         public string Name { get; set; }
 
         public int ID { get; set; } 
-        public  List<ExerciseGetDTO> Exercises { get; set; }
-
+        public  List<RoutineExerciseGetDTO> Exercises { get; set; }
         public int DayOfWeek { get; set; }
 
 

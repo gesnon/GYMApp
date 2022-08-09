@@ -72,4 +72,9 @@
   background-color: #ccc;
 }
 
+.buttonsContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 

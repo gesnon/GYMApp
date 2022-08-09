@@ -1,8 +1,8 @@
 import { Exercise } from "./Exercise"
-
+import { RoutineExercise } from "./RoutineExercise"
 export interface TrainingDay {
     description: string,
     dayOfWeek: number,
-    exercises: Exercise[],
+    exercises: RoutineExercise[],
     id:string
 };

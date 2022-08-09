@@ -14,8 +14,8 @@ function GetExercise() {
     const { id } = useParams();
     const [exersise, setExercise] = useState({} as Exercise);
     useEffect(() => {
-        const exrciseService = new ExerciseService();
-        exrciseService.getExercise(Number.parseInt(id ?? "")).then(res => setExercise(res));
+        const exerciseService = new ExerciseService();
+        exerciseService.getExercise(Number.parseInt(id ?? "")).then(res => setExercise(res));
     }, []);
    
 

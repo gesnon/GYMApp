@@ -16,6 +16,7 @@ import CreateExercise from './componets/CreateExercise/CreateExercise';
 import UpdateClient from './componets/UpdateClient/UpdateClient';
 import CreateMeasurement from './componets/Measurement/CreateMeasurement/CreateMeasurement';
 import CurrentRoutine from './componets/Routine/CurrentRoutine';
+import CreateRoutineExercise from './componets/RoutineExercise/CreateRoutineExercise/CreateRoutineExercise';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
             <Route path='/updateClientInfo/:id' element={<UpdateClient />} />
             <Route path='/measurement/:id' element={<CreateMeasurement />} />
             <Route path='/test1' element={<CurrentRoutine />} />
+            <Route path='/routineExercise' element={<CreateRoutineExercise />} />
           </Routes>
           
         </div>
